@@ -44,7 +44,7 @@ import {
       </Link>
     );
   }
-  
+
   <Box boxSize='sm'>
   <Image src='https://bit.ly/dan-abramov' alt='Dan Abramov' />
 </Box>
@@ -114,7 +114,7 @@ import {
               <Flex justify="space-between" width="100%">
                 <HStack spacing={8}>
                 <Image
-                  src="../public/image.jpeg" // Update the path as needed
+                  src="/image.jpeg" // Update the path as needed
                   alt="Logo"
                   boxSize="50px" // Adjust size as needed
                   />

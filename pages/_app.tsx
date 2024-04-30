@@ -8,7 +8,7 @@ import posthog from "posthog-js";
 import React from "react";
 import { useRouter } from "../node_modules/next/router";
 import { Lora } from "@next/font/google";
-import { Image } from "@chakra-ui/react";
+
 
 
 const lora = Lora({ subsets: ["latin"], display: "swap" });
@@ -39,7 +39,7 @@ const lora = Lora({ subsets: ["latin"], display: "swap" });
 const theme = extendTheme(
   {
     fonts: {
-      heading: lora.style.fontFamily,
+      heading: lora.style.fontFamily, // This property is used to set custom fonts for the application. In your snippet, both the heading and body font families are set to use lora.style.fontFamily. This suggests that the font family Lora is being applied to all heading and body text throughout the application, ensuring a consistent look.
       body: lora.style.fontFamily,
     },
   },
@@ -48,15 +48,15 @@ const theme = extendTheme(
       'h1, h2, h3, h4, h5, h6': {
         mt: 2,
         mb: 2,
-        fontSize: '2xl' // Example to set font size for headings
+        fontSize: '3xl' // Example to set font size for headings
       },
       p: {
         my: 3,
         fontSize: 'md' // Example to set font size for paragraphs
       },
       a: {
-        color: "blue.500",
-        fontSize: 'sm' // Example to set font size for links
+        color: "purple.500",
+        fontSize: 'md' // Example to set font size for links
       },
     },
   })

@@ -49,7 +49,14 @@ import {
   <Image src='https://bit.ly/dan-abramov' alt='Dan Abramov' />
 </Box>
   
+
   function Layout({ children }: PropsWithChildren) {
+    const DinosaurAnimation = () => (
+      <Box height="120px" width="120px"> {/* Adjust the size as needed */}
+      <Image src="/random.gif" alt="Running Dinosaur" />
+    </Box>
+     );
+
     return (
       <Container
         position="relative"
@@ -77,12 +84,23 @@ import {
               <Text fontWeight="bold" fontSize="smaller">
                 FIND ME ON
               </Text>
+              <DinosaurAnimation /> {/* Usage of the DinosaurAnimation component */}
               <Navigation link=".." isExternal>
                 Twitter
               </Navigation>
-              <Navigation link=".." isExternal>
+              <Navigation link="https://letterboxd.com/aswin_manohar/" isExternal>
+                Letterboxd
+              </Navigation>
+              <Navigation link="https://github.com/AswinManohar" isExternal>
                 GitHub
               </Navigation>
+              <Image
+              src='/Arecibo_message.svg.png'
+              alt='Responsive Logo'
+              height={['200px', '300px']} // Adjust based on your needs
+              width="auto" // Adjust width automatically based on the height
+              objectFit='cover'
+            />
             </VStack>
           </VStack>
         </Flex>
@@ -141,14 +159,15 @@ import {
                       </VStack>
                     </MenuGroup>
                     <MenuGroup title="FIND ME ON">
+              
                       <VStack align="flex-start" px={4} spacing={3} mb={2}>
-                        <Navigation
-                          link="https://twitter.com/majmudaradam"
+                      {                         <Navigation
+                          link=""
                           isExternal
                         >
                           Twitter
-                        </Navigation>
-                        <Navigation link="https://github.com/adam-maj" isExternal>
+                        </Navigation> } 
+                        <Navigation link="https://github.com/AswinManohar" isExternal>
                           GitHub
                         </Navigation>
                       </VStack>

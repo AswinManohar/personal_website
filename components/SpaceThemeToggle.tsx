@@ -9,7 +9,7 @@ const SpaceThemeToggle = () => {
   
   return (
     <Box display="inline-block" ml={2} cursor="pointer">
-      <Tooltip label={spaceThemeEnabled ? 'Disable Space Theme' : 'Enter void and get lost'}>
+      <Tooltip label={spaceThemeEnabled ? 'Escape void' : 'Enter void and get lost'}>
         <IconButton
           aria-label="Toggle space theme"
           icon={

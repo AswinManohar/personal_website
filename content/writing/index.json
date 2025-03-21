@@ -1,8 +1,26 @@
 [
   {
-    "title": "new article",
-    "date": "April 9, 2023",
+    "title": "The tired self as I know it",
+    "date": "Jan 20, 2025",
+    "url": "/writing/personal_self",
+    "external": true
+  },
+  {
+    "title": "Is it always going to be like this?",
+    "date": "April 20, 2024",
     "url": "https://medium.com/@aswinbio/is-it-always-going-to-be-like-this-coming-to-terms-with-anxiety-in-the-era-of-maximum-freedom-c0fd6706fef0",
+    "external": true
+  },
+  {
+    "title": "Adapting to the age of LLMs & why you should recalibrate and stay ahead",
+    "date": "May 5, 2023",
+    "url": "https://medium.com/@aswinbio/adapting-to-the-age-of-llms-why-you-should-recalibrate-and-stay-ahead-5f583e0c3301",
+    "external": true
+  },
+  {
+    "title": "10 Tendencies to stay relevant and reinvent yourself in the AI era",
+    "date": "Apr 19, 2023",
+    "url": "https://medium.com/@aswinbio/what-does-it-take-to-stay-relevant-in-2023-and-re-inventing-yourself-5e63fa3663a3",
     "external": true
   }
 ]

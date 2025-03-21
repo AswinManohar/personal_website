@@ -1,5 +1,5 @@
 import type { AppProps } from "../node_modules/next/app";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react";
 import { Prose, withProse } from "@nikolovlazar/chakra-ui-prose";
 import Layout from "../components/Layout";
 import { ReactElement } from "react";
@@ -7,17 +7,19 @@ import { DefaultSeo } from "next-seo";
 import posthog from "posthog-js";
 import React from "react";
 import { useRouter } from "../node_modules/next/router";
-import { Lora } from "@next/font/google";
+import { Inter } from "@next/font/google";
+import { Box } from '@chakra-ui/react';
+
+import { ThemeProvider } from '../context/ThemeContext';
 
 
-
-const lora = Lora({ subsets: ["latin"], display: "swap" });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 /* const theme = extendTheme(
   {
     fonts: {
-      heading: lora.style.fontFamily,
-      body: lora.style.fontFamily,
+      heading: inter.style.fontFamily,
+      body: inter.style.fontFamily,
     },
   },
   withProse({
@@ -39,12 +41,19 @@ const lora = Lora({ subsets: ["latin"], display: "swap" });
 const theme = extendTheme(
   {
     fonts: {
-      heading: lora.style.fontFamily, // This property is used to set custom fonts for the application. In your snippet, both the heading and body font families are set to use lora.style.fontFamily. This suggests that the font family Lora is being applied to all heading and body text throughout the application, ensuring a consistent look.
-      body: lora.style.fontFamily,
+      heading: inter.style.fontFamily,
+      body: inter.style.fontFamily,
+    },
+    styles: {
+      global: (props: any) => ({
+        body: {
+          color: props.colorMode === 'dark' ? 'white' : 'black',
+        },
+      }),
     },
   },
   withProse({
-    baseStyle: {
+    baseStyle: (props: any) => ({
       'h1, h2, h3, h4, h5, h6': {
         mt: 2,
         mb: 2,
@@ -52,13 +61,23 @@ const theme = extendTheme(
       },
       p: {
         my: 3,
-        fontSize: 'md' // Example to set font size for paragraphs
+        fontSize: 'md',
+        color: props.colorMode === 'dark' ? 'white' : 'black',
       },
       a: {
-        color: "purple.500",
-        fontSize: 'md' // Example to set font size for links
+        color: props.colorMode === 'dark' ? 'purple.300' : 'purple.500',
+        fontSize: 'md',
       },
-    },
+      strong: {
+        color: props.colorMode === 'dark' ? 'white' : 'black',
+      },
+      li: {
+        color: props.colorMode === 'dark' ? 'white' : 'black',
+      },
+      figcaption: {
+        color: props.colorMode === 'dark' ? 'gray.300' : 'gray.600',
+      },
+    }),
   })
 );
 
@@ -88,14 +107,15 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ChakraProvider theme={theme}>
+    <ThemeProvider>
+      <ChakraProvider theme={theme}>
       <DefaultSeo
         title="Aswin Manohar"
-        description="I'm a constant learner and aspiring technical generalist. I'm also a founding enginer at thirdweb and on gap year from the University of Pennsylvania."
+        description="I’m an Astrophysicist turned Data scientist – in the constant prusit for transformative ideas and technologies that will make earth a better place and I like engaging and learning them."
         openGraph={{
           title: "Aswin Manohar",
           description:
-            "I'm a constant learner and aspiring technical generalist. I'm also a founding enginer at thirdweb and on gap year from the University of Pennsylvania.",
+            "I’m an Astrophysicist turned Data scientist – in the constant prusit for transformative ideas and technologies that will make earth a better place and I like engaging and learning them. ",
           images: [
             {
               url: "",
@@ -107,5 +127,6 @@ export default function App({ Component, pageProps }: AppProps) {
       />
       {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
+    </ThemeProvider>
   );
 }

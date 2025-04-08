@@ -107,9 +107,10 @@ function Layout({ children }: PropsWithChildren) {
                   NAVIGATION
                 </Text>
                 <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
-                <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Thoughts and Feelings</Navigation>
+                <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
                 <Navigation link="/books" spaceEnabled={spaceThemeEnabled}>Books</Navigation>
                 <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
+                <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
               </VStack>
               <VStack align="flex-start" spacing={6}>
                 <Text fontWeight="bold" fontSize="smaller" color={textColor}>
@@ -163,13 +164,16 @@ function Layout({ children }: PropsWithChildren) {
                       <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
                     </Box>
                     <Box display={{ base: "none", md: "block" }}>
-                      <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Thoughts and Feelings</Navigation>
+                      <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
                     </Box>
                     <Box display={{ base: "none", md: "block" }}>
                       <Navigation link="/books" spaceEnabled={spaceThemeEnabled}>Books</Navigation>
                     </Box>
                     <Box display={{ base: "none", md: "block" }}>
                       <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
+                    </Box>
+                    <Box display={{ base: "none", md: "block" }}>
+                      <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
                     </Box>
                   </HStack>
                   <Menu>
@@ -190,9 +194,10 @@ function Layout({ children }: PropsWithChildren) {
                       <MenuGroup title="NAVIGATION" color={textColor}>
                         <VStack align="flex-start" px={4} spacing={3} mb={4}>
                           <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
-                          <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Thoughts and Feelings</Navigation>
+                          <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
                           <Navigation link="/books" spaceEnabled={spaceThemeEnabled}>Books</Navigation>
                           <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
+                          <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
                         </VStack>
                       </MenuGroup>
                       <MenuGroup title="FIND ME ON" color={textColor}>

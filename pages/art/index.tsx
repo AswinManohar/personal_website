@@ -1,10 +1,9 @@
 import {
   Heading,
   SimpleGrid,
-  Box,
+  VStack,
   Image,
   Text,
-  Stack,
 } from "@chakra-ui/react";
 import type { NextPageWithLayout } from "next";
 import Layout from "../../components/Layout";
@@ -19,36 +18,20 @@ const Art: NextPageWithLayout<ArtProps> = ({ artworks }) => {
   return (
     <>
       <NextSeo title="Art | Aswin Manohar" />
-      <SimpleGrid columns={[1, 2, 3]} spacing={6} width="100%">
+      <SimpleGrid columns={[1, 1, 2]} spacing={8} width="100%">
         {artworks.map((artwork) => (
-          <Box key={artwork.title} position="relative">
+          <VStack key={artwork.title} align="start" spacing={3}>
             <Image
               src={artwork.image}
               alt={artwork.title}
-              objectFit="cover"
+              objectFit="contain"
               width="100%"
-              height="300px"
-              borderRadius="md"
+              height="auto"
             />
-            <Stack 
-              position="absolute" 
-              bottom={0} 
-              left={0} 
-              right={0}
-              p={4}
-              bg="rgba(0, 0, 0, 0.7)"
-              color="white"
-              borderBottomRadius="md"
-            >
-              <Heading as="h3" size="sm">
-                {artwork.title}
-              </Heading>
-              <Text fontSize="sm">{artwork.medium}</Text>
-              <Text fontSize="xs" color="gray.300">
-                {artwork.date}
-              </Text>
-            </Stack>
-          </Box>
+            <Text fontSize="lg" fontWeight="medium">
+              {artwork.title}
+            </Text>
+          </VStack>
         ))}
       </SimpleGrid>
     </>

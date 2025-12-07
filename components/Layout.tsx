@@ -11,19 +11,23 @@ import {
   MenuList,
   MenuItem,
   Icon,
+  Avatar,
   MenuGroup,
+  Image,
+  useColorMode,
 } from "@chakra-ui/react";
-import Link from "../node_modules/next/link";
-import { useRouter } from "../node_modules/next/router";
+import { FaTwitter, FaGithub, FaFilm, FaEnvelope } from "react-icons/fa";
+import { FiMenu } from "react-icons/fi";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect } from "react";
-import { FiMenu } from "../node_modules/react-icons/fi";
-import { Image } from "@chakra-ui/react";
 import SpaceBackground from './SpaceBackground';
 import SpaceThemeToggle from './SpaceThemeToggle';
+import TypewriterEffect from './TypewriterEffect';
 import { useTheme } from '../context/ThemeContext';
-import { useColorMode } from '@chakra-ui/react';
 
-function Navigation({ spaceEnabled, 
+function Navigation({
+  spaceEnabled,
   link,
   children,
   isExternal,
@@ -51,14 +55,9 @@ function Navigation({ spaceEnabled,
 }
 
 function Layout({ children }: PropsWithChildren) {
-  const DinosaurAnimation = () => (
-    <Box height="120px" width="120px"> {/* Adjust the size as needed */}
-      <Image src="/random.gif" alt="Running Dinosaur" />
-    </Box>
-  );
-
   const { spaceThemeEnabled } = useTheme();
-  const { colorMode, setColorMode } = useColorMode();
+  const { setColorMode } = useColorMode();
+  const router = useRouter();
 
   useEffect(() => {
     setColorMode(spaceThemeEnabled ? 'dark' : 'light');
@@ -72,78 +71,22 @@ function Layout({ children }: PropsWithChildren) {
         <SpaceBackground starCount={300} speed={0.03} depth={4} color="#ffffff" backgroundColor="rgba(0, 0, 0, 0.95)" />
       )}
       <Container maxW="container.xl" pt={{ base: 6, md: 10 }}>
-        {/* Removed ColorModeSwitcher and its container */}
         <Container
           position="relative"
-          mt={{ base: 12, md: 20 }}
+          maxW="container.xl"
+          mt={{ base: 20, md: 20 }}
           pb={{ base: 8, md: "10em" }}
           px={{ base: 2, md: 4 }}
           gap={{ md: 10 }}
         >
-          {/* Desktop sidebar navigation */}
-          <Flex
-            position="absolute"
-            right="100%"
-            mr="240px"
-            mt="20px"
-            display={{ base: "none", lg: "flex" }}
-          >
-            <VStack 
-              position="fixed" 
-              align="flex-start" 
-              spacing={16} 
-              maxH="calc(100vh - 40px)" 
-              overflowY="auto"
-              sx={{
-                '&::-webkit-scrollbar': {
-                  display: 'none',
-                },
-                'scrollbarWidth': 'none',
-                '-ms-overflow-style': 'none',
-              }}
-            >
-              <VStack align="flex-start" spacing={6}>
-                <Text fontWeight="bold" fontSize="smaller" color={textColor}>
-                  NAVIGATION
-                </Text>
-                <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
-                <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
-                <Navigation link="/books" spaceEnabled={spaceThemeEnabled}>Books</Navigation>
-                <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
-                <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
-              </VStack>
-              <VStack align="flex-start" spacing={6}>
-                <Text fontWeight="bold" fontSize="smaller" color={textColor}>
-                  FIND ME ON
-                </Text>
-                <DinosaurAnimation /> {/* Usage of the DinosaurAnimation component */}
-                <Navigation link=".." isExternal spaceEnabled={spaceThemeEnabled}>
-                  Twitter
-                </Navigation>
-                <Navigation link="https://letterboxd.com/aswin_manohar/" isExternal spaceEnabled={spaceThemeEnabled}>
-                  Letterboxd
-                </Navigation>
-                <Navigation link="https://github.com/AswinManohar" isExternal spaceEnabled={spaceThemeEnabled}>
-                  GitHub
-                </Navigation>
-                <Image
-                  src='/Arecibo_message.svg.png'
-                  alt='Responsive Logo'
-                  height={['200px', '300px']}
-                  width="auto"
-                  objectFit='cover'
-                />
-              </VStack>
-            </VStack>
-          </Flex>
-          <Container width={{ base: "100%", md: "container.md" }} px={{ base: 4, md: 8 }} position="relative">
+          <Container maxW="100%" px={{ base: 4, md: 8 }} position="relative">
             {/* Mobile Navigation */}
             <Flex
               justify="space-between"
               position="fixed"
               top={0}
-              display={{ base: "flex", lg: "none" }}
-              height={{ base: 16, md: 12 }}
+              display="flex"
+              height={{ base: 24, md: 12 }}
               zIndex={50}
               left={0}
               width="100%"
@@ -155,11 +98,6 @@ function Layout({ children }: PropsWithChildren) {
               <Container px={{ base: 4, md: 8 }}>
                 <Flex justify="space-between" width="100%">
                   <HStack spacing={{ base: 2, md: 8 }}>
-                    <Image
-                      src="/image.jpeg"
-                      alt="Logo"
-                      boxSize={{ base: "40px", md: "50px" }}
-                    />
                     <Box display={{ base: "none", md: "block" }}>
                       <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
                     </Box>
@@ -175,45 +113,88 @@ function Layout({ children }: PropsWithChildren) {
                     <Box display={{ base: "none", md: "block" }}>
                       <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
                     </Box>
+                    <SpaceThemeToggle />
+                    <Box display={{ base: "block", md: "none" }}>
+                      <Menu>
+                        <MenuButton
+                          as={IconButton}
+                          aria-label="Options"
+                          icon={<Icon as={FiMenu} boxSize={4} />}
+                          variant="outline"
+                          color={textColor}
+                          borderColor={spaceThemeEnabled ? "gray.500" : "gray.200"}
+                          _hover={{
+                            bg: spaceThemeEnabled ? 'gray.700' : 'gray.100'
+                          }}
+                          size="sm"
+                          display="flex"
+                        />
+                        <MenuList bg={spaceThemeEnabled ? 'gray.800' : 'white'}>
+                          <MenuGroup title="NAVIGATION" color={textColor}>
+                            <VStack align="flex-start" px={4} spacing={3} mb={4}>
+                              <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
+                              <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
+                              <Navigation link="/books" spaceEnabled={spaceThemeEnabled}>Books</Navigation>
+                              <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
+                              <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
+                            </VStack>
+                          </MenuGroup>
+                          <MenuGroup title="FIND ME ON" color={textColor}>
+                            <VStack align="flex-start" px={4} spacing={3} mb={2}>
+                              <Navigation link="https://twitter.com/aswin_manohar" isExternal spaceEnabled={spaceThemeEnabled}>Twitter</Navigation>
+                              <Navigation link="https://github.com/AswinManohar" isExternal spaceEnabled={spaceThemeEnabled}>
+                                GitHub
+                              </Navigation>
+                            </VStack>
+                          </MenuGroup>
+                        </MenuList>
+                      </Menu>
+                    </Box>
                   </HStack>
-                  <Menu>
-                    <MenuButton
-                      as={IconButton}
-                      aria-label="Options"
-                      icon={<Icon as={FiMenu} boxSize={4} />}
-                      variant="outline"
-                      color={textColor}
-                      borderColor={spaceThemeEnabled ? "gray.500" : "gray.200"}
-                      _hover={{
-                        bg: spaceThemeEnabled ? 'gray.700' : 'gray.100'
-                      }}
-                      size="sm"
-                      display={{ base: "flex", md: "flex" }}
-                    />
-                    <MenuList bg={spaceThemeEnabled ? 'gray.800' : 'white'}>
-                      <MenuGroup title="NAVIGATION" color={textColor}>
-                        <VStack align="flex-start" px={4} spacing={3} mb={4}>
-                          <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
-                          <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
-                          <Navigation link="/books" spaceEnabled={spaceThemeEnabled}>Books</Navigation>
-                          <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
-                          <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
-                        </VStack>
-                      </MenuGroup>
-                      <MenuGroup title="FIND ME ON" color={textColor}>
-                        <VStack align="flex-start" px={4} spacing={3} mb={2}>
-                          <Navigation link="" isExternal spaceEnabled={spaceThemeEnabled}>Twitter</Navigation>
-                          <Navigation link="https://github.com/AswinManohar" isExternal spaceEnabled={spaceThemeEnabled}>
-                            GitHub
-                          </Navigation>
-                        </VStack>
-                      </MenuGroup>
-                    </MenuList>
-                  </Menu>
                 </Flex>
               </Container>
             </Flex>
-            {children}
+            <Flex direction={{ base: "column", md: "row" }} gap={8}>
+              <VStack
+                align={{ base: "center", md: "flex-start" }}
+                spacing={4}
+                minW={{ md: "200px" }}
+                position={{ md: "sticky" }}
+                top={{ md: "100px" }}
+                height={{ md: "fit-content" }}
+                alignSelf={{ md: "flex-start" }}
+              >
+                <Avatar size="2xl" name="Aswin Manohar" src="/aswin.jpeg" />
+                <VStack align={{ base: "center", md: "flex-start" }} spacing={2}>
+                  <TypewriterEffect
+                    text="Aswin Manohar"
+                    fontWeight="normal"
+                    fontSize="lg"
+                    color={textColor}
+                  />
+                  <Text fontSize="sm" color="gray.700" textAlign={{ base: "center", md: "left" }}>
+                    Data Scientist, MLE & writer
+                  </Text>
+                </VStack>
+                <HStack spacing={4}>
+                  <Link href="mailto:aswinbio@gmail.com" target="_blank">
+                    <Icon as={FaEnvelope} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
+                  </Link>
+                  <Link href="https://twitter.com/aswin_manohar" target="_blank">
+                    <Icon as={FaTwitter} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
+                  </Link>
+                  <Link href="https://github.com/AswinManohar" target="_blank">
+                    <Icon as={FaGithub} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
+                  </Link>
+                  <Link href="https://letterboxd.com/aswin_manohar/" target="_blank">
+                    <Icon as={FaFilm} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
+                  </Link>
+                </HStack>
+              </VStack>
+              <Box flex={1} maxW="container.md">
+                {children}
+              </Box>
+            </Flex>
           </Container>
         </Container>
       </Container>

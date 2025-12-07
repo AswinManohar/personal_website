@@ -1,41 +1,69 @@
 [
-    {
-      "title": "Cinema, aliens, philosophy and some",
-      "date": "May 25, 2025",
-      "url": "https://open.substack.com/pub/refusingtheprogram/p/cinema-aliens-philosophy-and-some?r=5fpilo&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true",
-      "external": true
-    },
-    {
-      "title": "Clarity's the real deal - Skills follows",
-      "date": "April 20, 2025",
-      "url": "https://open.substack.com/pub/aswinmanohar/p/claritys-the-real-deal-skills-follows?r=5fpilo&utm_campaign=post&utm_medium=web&showWelcomeOnShare=false",
-      "external": true
-    },
-    {
-      "title": "AI, the Richardson paradox and new abstractions",
-      "date": "April 7, 2025",
-      "url": "https://aswinmanohar.substack.com/p/ai-the-richardson-paradox-and-new",
-      "external": true
-    },
-    {
-      "title": "The tired self as I know it",
-      "date": "Jan 20, 2025",
-      "url": "/writing/personal_self",
-      "external": false
-    },
-    {
-      "title": "Is it always going to be like this?",
-      "date": "April 20, 2024",
-      "url": "https://medium.com/@aswinbio/is-it-always-going-to-be-like-this-coming-to-terms-with-anxiety-in-the-era-of-maximum-freedom-c0fd6706fef0"
-    },
-    {
-      "title": "Adapting to the age of LLMs & why you should recalibrate and stay ahead",
-      "date": "May 5, 2023",
-      "url": "https://medium.com/@aswinbio/adapting-to-the-age-of-llms-why-you-should-recalibrate-and-stay-ahead-5f583e0c3301"
-    },
-    {
-      "title": "10 Tendencies to stay relevant and reinvent yourself in the AI era",
-      "date": "Apr 19, 2023",
-      "url": "https://medium.com/@aswinbio/what-does-it-take-to-stay-relevant-in-2023-and-re-inventing-yourself-5e63fa3663a3"
-    }
+  {
+    "title": "Cinema, aliens, philosophy and some",
+    "date": "May 25, 2025",
+    "url": "https://open.substack.com/pub/refusingtheprogram/p/cinema-aliens-philosophy-and-some?r=5fpilo&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true",
+    "external": true,
+    "tags": [
+      "Philosophy",
+      "Cinema"
+    ]
+  },
+  {
+    "title": "Clarity's the real deal - Skills follows",
+    "date": "April 20, 2025",
+    "url": "https://open.substack.com/pub/aswinmanohar/p/claritys-the-real-deal-skills-follows?r=5fpilo&utm_campaign=post&utm_medium=web&showWelcomeOnShare=false",
+    "external": true,
+    "tags": [
+      "Career",
+      "Skills"
+    ]
+  },
+  {
+    "title": "AI, the Richardson paradox and new abstractions",
+    "date": "April 7, 2025",
+    "url": "https://aswinmanohar.substack.com/p/ai-the-richardson-paradox-and-new",
+    "external": true,
+    "tags": [
+      "AI",
+      "Philosophy"
+    ]
+  },
+  {
+    "title": "The tired self as I know it",
+    "date": "Jan 20, 2025",
+    "url": "/writing/personal_self",
+    "external": false,
+    "tags": [
+      "Personal",
+      "Philosophy"
+    ]
+  },
+  {
+    "title": "Is it always going to be like this?",
+    "date": "April 20, 2024",
+    "url": "https://medium.com/@aswinbio/is-it-always-going-to-be-like-this-coming-to-terms-with-anxiety-in-the-era-of-maximum-freedom-c0fd6706fef0",
+    "tags": [
+      "Mental Health",
+      "Personal"
+    ]
+  },
+  {
+    "title": "Adapting to the age of LLMs & why you should recalibrate and stay ahead",
+    "date": "May 5, 2023",
+    "url": "https://medium.com/@aswinbio/adapting-to-the-age-of-llms-why-you-should-recalibrate-and-stay-ahead-5f583e0c3301",
+    "tags": [
+      "LLMs",
+      "Career"
+    ]
+  },
+  {
+    "title": "10 Tendencies to stay relevant and reinvent yourself in the AI era",
+    "date": "Apr 19, 2023",
+    "url": "https://medium.com/@aswinbio/what-does-it-take-to-stay-relevant-in-2023-and-re-inventing-yourself-5e63fa3663a3",
+    "tags": [
+      "AI",
+      "Career"
+    ]
+  }
 ]

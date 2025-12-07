@@ -28,3 +28,9 @@ export async function getMdxContent<TMetadata>(
     source: source.compiledSource,
   };
 }
+
+export const timtoread = (content: string) => {
+  const words = content.split(" ").length;
+  const minutes = Math.ceil(words / 200);
+  return `${minutes} min read`;
+}

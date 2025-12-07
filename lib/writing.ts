@@ -10,6 +10,7 @@ export interface Post {
   url: string;
   external: boolean;
   source: string;
+  tags?: string[];
 }
 
 

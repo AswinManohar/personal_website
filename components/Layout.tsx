@@ -13,14 +13,15 @@ import {
   Icon,
   Avatar,
   MenuGroup,
-  Image,
   useColorMode,
 } from "@chakra-ui/react";
 import { FaTwitter, FaGithub, FaFilm, FaEnvelope } from "react-icons/fa";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect } from "react";
+import { animate, AnimatePresence, motion } from "framer-motion";
 import SpaceBackground from './SpaceBackground';
 import SpaceThemeToggle from './SpaceThemeToggle';
 import TypewriterEffect from './TypewriterEffect';
@@ -77,7 +78,6 @@ function Layout({ children }: PropsWithChildren) {
           mt={{ base: 20, md: 20 }}
           pb={{ base: 8, md: "10em" }}
           px={{ base: 2, md: 4 }}
-          gap={{ md: 10 }}
         >
           <Container maxW="100%" px={{ base: 4, md: 8 }} position="relative">
             {/* Mobile Navigation */}
@@ -95,17 +95,14 @@ function Layout({ children }: PropsWithChildren) {
               borderBottomColor={spaceThemeEnabled ? "gray.700" : "gray.200"}
               bg={spaceThemeEnabled ? "rgba(0, 0, 0, 0.95)" : "white"}
             >
-              <Container px={{ base: 4, md: 8 }}>
-                <Flex justify="space-between" width="100%">
+              <Container px={{ base: 4, md: 8 }} maxW="container.xl">
+                <Flex justify="flex-end" width="100%">
                   <HStack spacing={{ base: 2, md: 8 }}>
                     <Box display={{ base: "none", md: "block" }}>
                       <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
                     </Box>
                     <Box display={{ base: "none", md: "block" }}>
                       <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
-                    </Box>
-                    <Box display={{ base: "none", md: "block" }}>
-                      <Navigation link="/books" spaceEnabled={spaceThemeEnabled}>Books</Navigation>
                     </Box>
                     <Box display={{ base: "none", md: "block" }}>
                       <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
@@ -115,39 +112,42 @@ function Layout({ children }: PropsWithChildren) {
                     </Box>
                     <SpaceThemeToggle />
                     <Box display={{ base: "block", md: "none" }}>
-                      <Menu>
-                        <MenuButton
-                          as={IconButton}
-                          aria-label="Options"
-                          icon={<Icon as={FiMenu} boxSize={4} />}
-                          variant="outline"
-                          color={textColor}
-                          borderColor={spaceThemeEnabled ? "gray.500" : "gray.200"}
-                          _hover={{
-                            bg: spaceThemeEnabled ? 'gray.700' : 'gray.100'
-                          }}
-                          size="sm"
-                          display="flex"
-                        />
-                        <MenuList bg={spaceThemeEnabled ? 'gray.800' : 'white'}>
-                          <MenuGroup title="NAVIGATION" color={textColor}>
-                            <VStack align="flex-start" px={4} spacing={3} mb={4}>
-                              <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
-                              <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
-                              <Navigation link="/books" spaceEnabled={spaceThemeEnabled}>Books</Navigation>
-                              <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
-                              <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
-                            </VStack>
-                          </MenuGroup>
-                          <MenuGroup title="FIND ME ON" color={textColor}>
-                            <VStack align="flex-start" px={4} spacing={3} mb={2}>
-                              <Navigation link="https://twitter.com/aswin_manohar" isExternal spaceEnabled={spaceThemeEnabled}>Twitter</Navigation>
-                              <Navigation link="https://github.com/AswinManohar" isExternal spaceEnabled={spaceThemeEnabled}>
-                                GitHub
-                              </Navigation>
-                            </VStack>
-                          </MenuGroup>
-                        </MenuList>
+                      <Menu placement="bottom">
+                        {({ isOpen }) => (
+                          <>
+                            <MenuButton
+                              as={IconButton}
+                              aria-label="Options"
+                              icon={<Icon as={isOpen ? FiX : FiMenu} boxSize={4} />}
+                              variant="outline"
+                              color={textColor}
+                              borderColor={spaceThemeEnabled ? "gray.500" : "gray.200"}
+                              _hover={{
+                                bg: spaceThemeEnabled ? 'gray.700' : 'gray.100'
+                              }}
+                              size="sm"
+                              display="flex"
+                            />
+                            <MenuList bg={spaceThemeEnabled ? 'gray.800' : 'white'}>
+                              <MenuGroup title="NAVIGATION" color={textColor}>
+                                <VStack align="flex-start" px={7} spacing={3} mb={4}>
+                                  <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
+                                  <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
+                                  <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
+                                  <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
+                                </VStack>
+                              </MenuGroup>
+                              <MenuGroup title="FIND ME ON" color={textColor}>
+                                <VStack align="flex-start" px={4} spacing={3} mb={2}>
+                                  <Navigation link="https://twitter.com/Aswin_polymath" isExternal spaceEnabled={spaceThemeEnabled}>Twitter</Navigation>
+                                  <Navigation link="https://github.com/AswinManohar" isExternal spaceEnabled={spaceThemeEnabled}>
+                                    GitHub
+                                  </Navigation>
+                                </VStack>
+                              </MenuGroup>
+                            </MenuList>
+                          </>
+                        )}
                       </Menu>
                     </Box>
                   </HStack>
@@ -156,7 +156,7 @@ function Layout({ children }: PropsWithChildren) {
             </Flex>
             <Flex direction={{ base: "column", md: "row" }} gap={8}>
               <VStack
-                align={{ base: "center", md: "flex-start" }}
+                align="center"
                 spacing={4}
                 minW={{ md: "200px" }}
                 position={{ md: "sticky" }}
@@ -164,23 +164,39 @@ function Layout({ children }: PropsWithChildren) {
                 height={{ md: "fit-content" }}
                 alignSelf={{ md: "flex-start" }}
               >
-                <Avatar size="2xl" name="Aswin Manohar" src="/aswin.jpeg" />
-                <VStack align={{ base: "center", md: "flex-start" }} spacing={2}>
+                <Box
+                  position="relative"
+                  width="128px"
+                  height="128px"
+                  borderRadius="full"
+                  overflow="hidden"
+                  borderWidth="2px"
+                  borderColor={spaceThemeEnabled ? "gray.700" : "gray.200"}
+                >
+                  <Image
+                    src="/aswin.jpeg"
+                    alt="Aswin Manohar"
+                    fill
+                    style={{ objectFit: "cover" }}
+                    priority
+                  />
+                </Box>
+                <VStack align="center" spacing={2}>
                   <TypewriterEffect
                     text="Aswin Manohar"
                     fontWeight="normal"
                     fontSize="lg"
                     color={textColor}
                   />
-                  <Text fontSize="sm" color="gray.700" textAlign={{ base: "center", md: "left" }}>
-                    Data Scientist, MLE & writer
+                  <Text fontSize="sm" color={spaceThemeEnabled ? "gray.300" : "gray.600"} textAlign={{ base: "center", md: "center" }}>
+                    Data Scientist
                   </Text>
                 </VStack>
                 <HStack spacing={4}>
                   <Link href="mailto:aswinbio@gmail.com" target="_blank">
                     <Icon as={FaEnvelope} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
                   </Link>
-                  <Link href="https://twitter.com/aswin_manohar" target="_blank">
+                  <Link href="https://x.com/Aswin_polymath" target="_blank">
                     <Icon as={FaTwitter} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
                   </Link>
                   <Link href="https://github.com/AswinManohar" target="_blank">
@@ -192,7 +208,17 @@ function Layout({ children }: PropsWithChildren) {
                 </HStack>
               </VStack>
               <Box flex={1} maxW="container.md">
-                {children}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={router.route}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    {children}
+                  </motion.div>
+                </AnimatePresence>
               </Box>
             </Flex>
           </Container>
@@ -200,6 +226,6 @@ function Layout({ children }: PropsWithChildren) {
       </Container>
     </Box>
   );
-}
 
-export default Layout;
+}
+export default Layout; 

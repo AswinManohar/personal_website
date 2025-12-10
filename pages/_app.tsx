@@ -47,7 +47,7 @@ const theme = extendTheme(
           color: props.colorMode === 'dark' ? 'white' : 'black',
           fontFamily: "'STIX Two Text', sans-serif",
           fontWeight: 400,
-          fontSize: '17px',
+          fontSize: '18px',
           textAlign: 'justify',
           lineHeight: '1.4',
         },
@@ -66,7 +66,7 @@ const theme = extendTheme(
       },
       p: {
         my: 3,
-        fontSize: '17px',
+        fontSize: '18px',
         color: props.colorMode === 'dark' ? 'white' : 'black',
         fontWeight: 400,
         textAlign: 'justify',
@@ -92,9 +92,7 @@ const theme = extendTheme(
 
 
 const getDefaultLayout = (page: ReactElement) => (
-  <Layout>
-    <Prose>{page}</Prose>
-  </Layout>
+  <Prose>{page}</Prose>
 );
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -117,24 +115,26 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
       <ChakraProvider theme={theme}>
-      <DefaultSeo
-        title="Aswin Manohar"
-        description="I'm an Astrophysicist turned Data scientist – in the constant prusit for transformative ideas and technologies that will make earth a better place and I like engaging and learning them."
-        openGraph={{
-          title: "Aswin Manohar",
-          description:
-            "I'm an Astrophysicist turned Data scientist – in the constant prusit for transformative ideas and technologies that will make earth a better place and I like engaging and learning them. ",
-          images: [
-            {
-              url: "",
-              type: "",
-            },
-          ],
-          siteName: "Aswin Manohar",
-        }}
-      />
-      {getLayout(<Component {...pageProps} />)}
-    </ChakraProvider>
+        <DefaultSeo
+          title="Aswin Manohar"
+          description="I'm an Astrophysicist turned Data scientist – in the constant prusit for transformative ideas and technologies that will make earth a better place and I like engaging and learning them."
+          openGraph={{
+            title: "Aswin Manohar",
+            description:
+              "I'm an Astrophysicist turned Data scientist – in the constant prusit for transformative ideas and technologies that will make earth a better place and I like engaging and learning them. ",
+            images: [
+              {
+                url: "",
+                type: "",
+              },
+            ],
+            siteName: "Aswin Manohar",
+          }}
+        />
+        <Layout>
+          {getLayout(<Component {...pageProps} />)}
+        </Layout>
+      </ChakraProvider>
     </ThemeProvider>
   );
 }

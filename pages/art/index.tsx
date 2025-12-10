@@ -40,7 +40,7 @@ const Art: NextPageWithLayout<ArtProps> = ({ artworks }) => {
 
 export default Art;
 
-Art.getLayout = (page) => <Layout>{page}</Layout>;
+Art.getLayout = (page) => page;
 
 export async function getStaticProps() {
   const artworks = getAllArtworkData();

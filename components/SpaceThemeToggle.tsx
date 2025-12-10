@@ -6,21 +6,21 @@ import { useTheme } from '../context/ThemeContext';
 const SpaceThemeToggle = () => {
   const { spaceThemeEnabled, toggleSpaceTheme } = useTheme();
   const iconColor = useColorModeValue('gray.600', 'gray.200');
-  
+
   return (
     <Box display="inline-block" ml={2} cursor="pointer">
-      <Tooltip label={spaceThemeEnabled ? 'Escape void' : 'Enter void and get lost'}>
+      <Tooltip label={spaceThemeEnabled ? 'Escape void' : 'Enter void'}>
         <IconButton
           aria-label="Toggle space theme"
           icon={
             spaceThemeEnabled ? (
               <FaRocket />
             ) : (
-              <Image 
-                src="/HD-wallpaper-8-bit-moon-sky-space-modified.png" 
-                alt="Planet" 
-                width="24px" 
-                height="24px" 
+              <Image
+                src="/HD-wallpaper-8-bit-moon-sky-space-modified.png"
+                alt="Planet"
+                width="24px"
+                height="24px"
                 objectFit="contain"
               />
             )

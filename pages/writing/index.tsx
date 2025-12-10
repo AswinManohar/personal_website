@@ -35,6 +35,7 @@ const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
               </Link>
               {post.tags && (
                 <HStack spacing={2}>
+                  <Text fontSize="sm" color="gray.500">Tags:</Text>
                   {post.tags.map((tag) => (
                     <Tag key={tag} size="sm" variant="subtle" colorScheme="gray">
                       {tag}
@@ -56,7 +57,7 @@ const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
 
 export default Writing;
 
-Writing.getLayout = (page) => <Layout>{page}</Layout>;
+Writing.getLayout = (page) => page;
 
 export async function getStaticProps() {
   const posts = getAllPostData();

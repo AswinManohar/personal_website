@@ -21,7 +21,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect } from "react";
-import { animate, AnimatePresence, motion } from "framer-motion";
+
 import SpaceBackground from './SpaceBackground';
 import SpaceThemeToggle from './SpaceThemeToggle';
 import TypewriterEffect from './TypewriterEffect';
@@ -170,8 +170,6 @@ function Layout({ children }: PropsWithChildren) {
                   height="128px"
                   borderRadius="full"
                   overflow="hidden"
-                  borderWidth="2px"
-                  borderColor={spaceThemeEnabled ? "gray.700" : "gray.200"}
                 >
                   <Image
                     src="/aswin.jpeg"
@@ -208,17 +206,7 @@ function Layout({ children }: PropsWithChildren) {
                 </HStack>
               </VStack>
               <Box flex={1} maxW="container.md">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={router.route}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    {children}
-                  </motion.div>
-                </AnimatePresence>
+                {children}
               </Box>
             </Flex>
           </Container>

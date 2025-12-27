@@ -48,7 +48,7 @@ const theme = extendTheme(
           fontFamily: "'STIX Two Text', sans-serif",
           fontWeight: 400,
           fontSize: '18px',
-          textAlign: 'justify',
+          textAlign: 'left',
           lineHeight: '1.4',
         },
       }),
@@ -69,7 +69,7 @@ const theme = extendTheme(
         fontSize: '18px',
         color: props.colorMode === 'dark' ? 'white' : 'black',
         fontWeight: 400,
-        textAlign: 'justify',
+        textAlign: 'left',
         lineHeight: '1.4'
       },
       a: {

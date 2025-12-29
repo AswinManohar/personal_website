@@ -32,10 +32,14 @@
   font-display: swap;
 }
 
-:root {
-  --font-primary: 'STIX Two Text', sans-serif;
+@font-face {
+  font-family: 'Homey Feeling';
+  src: url('/fonts/Homey Feeling.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-* {
-  font-family: var(--font-primary);
+:root {
+  --font-primary: 'STIX Two Text', sans-serif;
 }

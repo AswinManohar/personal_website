@@ -44,43 +44,88 @@ const theme = extendTheme(
     styles: {
       global: (props: any) => ({
         body: {
-          color: props.colorMode === 'dark' ? 'white' : 'black',
+          // Global Body Styles: Affects the entire website unless overridden
+          color: props.colorMode === 'dark' ? 'rgb(153, 153, 153)' : 'black',
           fontFamily: "'STIX Two Text', sans-serif",
           fontWeight: 400,
-          fontSize: '18px',
+          fontSize: '15px', // Base font size for the site
           textAlign: 'left',
-          lineHeight: '1.4',
+          lineHeight: '1.6', // Global line height
         },
       }),
     },
   },
   withProse({
     baseStyle: (props: any) => ({
-      'h1, h2, h3, h4, h5, h6': {
+      h1: {
+        // H1: Main Page Titles (e.g. "Hi, I'm Aswin")
         mt: 2,
         mb: 2,
-        fontSize: '3xl',
+        fontSize: '4xl',
         fontWeight: 400,
         textAlign: 'left',
-        lineHeight: '1.4'
+        lineHeight: '1.2',
+      },
+      h2: {
+        // H2: Major Section Headings (e.g. "Background", "Interests")
+        mt: 2,
+        mb: 2,
+        fontSize: '2xl',
+        fontWeight: 400,
+        textAlign: 'left',
+        lineHeight: '1.3',
+      },
+      h3: {
+        // H3: Sub-section Headings
+        mt: 2,
+        mb: 2,
+        fontSize: 'xl',
+        fontWeight: 600,
+        textAlign: 'left',
+        lineHeight: '1.3',
+      },
+      h4: {
+        mt: 2,
+        mb: 2,
+        fontSize: 'lg',
+        fontWeight: 400,
+        textAlign: 'left',
+        lineHeight: '1.3',
+      },
+      h5: {
+        mt: 2,
+        mb: 2,
+        fontSize: 'md',
+        fontWeight: 400,
+        textAlign: 'left',
+        lineHeight: '1.3',
+      },
+      h6: {
+        mt: 2,
+        mb: 2,
+        fontSize: 'sm',
+        fontWeight: 400,
+        textAlign: 'left',
+        lineHeight: '1.3',
       },
       p: {
-        my: 3,
-        fontSize: '18px',
-        color: props.colorMode === 'dark' ? 'white' : 'black',
+        // Paragraphs: Main body text content
+        my: 2, // Spacing between paragraphs (vertical margin)
+        fontSize: '15px', // Font size for body text
+        color: props.colorMode === 'dark' ? 'rgb(153, 153, 153)' : 'black',
         fontWeight: 400,
         textAlign: 'left',
-        lineHeight: '1.4'
+        lineHeight: '1.6' // Spacing between lines within a paragraph
       },
       a: {
-        color: props.colorMode === 'dark' ? 'purple.300' : 'purple.500',
-        fontSize: '17px',
+        color: props.colorMode === 'dark' ? '#725CAD' : '#725CAD',
+        fontSize: '15px',
       },
       strong: {
-        color: props.colorMode === 'dark' ? 'white' : 'black',
+        color: props.colorMode === 'dark' ? 'rgb(153, 153, 153)' : 'black',
       },
       li: {
-        color: props.colorMode === 'dark' ? 'white' : 'black',
+        color: props.colorMode === 'dark' ? 'rgb(153, 153, 153)' : 'black',
       },
       figcaption: {
         color: props.colorMode === 'dark' ? 'gray.300' : 'gray.600',
@@ -92,7 +137,9 @@ const theme = extendTheme(
 
 
 const getDefaultLayout = (page: ReactElement) => (
-  <Prose>{page}</Prose>
+  <Layout>
+    <Prose>{page}</Prose>
+  </Layout>
 );
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -131,9 +178,7 @@ export default function App({ Component, pageProps }: AppProps) {
             siteName: "Aswin Manohar",
           }}
         />
-        <Layout>
-          {getLayout(<Component {...pageProps} />)}
-        </Layout>
+        {getLayout(<Component {...pageProps} />)}
       </ChakraProvider>
     </ThemeProvider>
   );

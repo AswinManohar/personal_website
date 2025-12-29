@@ -61,7 +61,11 @@ const ML: NextPageWithLayout<MLProps> = ({ builds }) => {
 
 export default ML;
 
-ML.getLayout = (page) => page;
+ML.getLayout = (page) => (
+  <Layout>
+    {page}
+  </Layout>
+);
 
 export async function getStaticProps() {
   const builds = getAllBuildData();

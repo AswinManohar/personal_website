@@ -14,6 +14,7 @@ import {
   Avatar,
   MenuGroup,
   useColorMode,
+  Spacer,
 } from "@chakra-ui/react";
 import { FaTwitter, FaGithub, FaFilm, FaEnvelope } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -45,13 +46,43 @@ function Navigation({
   return (
     <Link href={link} target={isExternal ? "_blank" : "_self"}>
       <Text
-        fontSize={{ base: "sm", md: "lg" }}
+        fontSize={{ base: "md", md: "lg" }}
         color={spaceEnabled ? (isActive ? "white" : "gray.300") : (isActive ? "black" : "gray.500")}
         _hover={{ color: spaceEnabled ? "white" : "black" }}
+        fontFamily={spaceEnabled ? "inherit" : "'STIX Two Text', sans-serif"}
       >
         {children}
       </Text>
     </Link>
+  );
+}
+
+function Footer({ spaceEnabled }: { spaceEnabled: boolean }) {
+  const iconColor = spaceEnabled ? "gray.300" : "gray.500";
+  const hoverColor = spaceEnabled ? "white" : "black";
+
+  return (
+    <Box as="footer" py={10} mt={10} borderTop="1px solid" borderColor={spaceEnabled ? "gray.800" : "gray.100"}>
+      <Container maxW="container.md">
+        <HStack justify="center" spacing={8}>
+          <Link href="mailto:aswinbio@gmail.com" target="_blank">
+            <Icon as={FaEnvelope} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
+          </Link>
+          <Link href="https://x.com/Aswin_polymath" target="_blank">
+            <Icon as={FaTwitter} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
+          </Link>
+          <Link href="https://github.com/AswinManohar" target="_blank">
+            <Icon as={FaGithub} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
+          </Link>
+          <Link href="https://letterboxd.com/aswin_manohar/" target="_blank">
+            <Icon as={FaFilm} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
+          </Link>
+        </HStack>
+        <Text textAlign="center" mt={4} fontSize="sm" color={spaceEnabled ? "gray.500" : "gray.400"}>
+          © {new Date().getFullYear()} Aswin Manohar
+        </Text>
+      </Container>
+    </Box>
   );
 }
 
@@ -64,156 +95,84 @@ function Layout({ children }: PropsWithChildren) {
     setColorMode(spaceThemeEnabled ? 'dark' : 'light');
   }, [spaceThemeEnabled, setColorMode]);
 
-  const textColor = spaceThemeEnabled ? "white" : "black";
+  const textColor = spaceThemeEnabled ? "rgb(153, 153, 153)" : "black";
 
   return (
-    <Box minH="100vh" w="100%" position="relative" bg={spaceThemeEnabled ? "transparent" : "white"} overflowX="hidden">
+    <Box minH="100vh" w="100%" position="relative" bg={spaceThemeEnabled ? "transparent" : "#FAFAFA"} overflowX="hidden">
       {spaceThemeEnabled && (
         <SpaceBackground starCount={300} speed={0.03} depth={4} color="#ffffff" backgroundColor="rgba(0, 0, 0, 0.95)" />
       )}
-      <Container maxW="container.xl" pt={{ base: 6, md: 10 }}>
-        <Container
-          position="relative"
-          maxW="container.xl"
-          mt={{ base: 20, md: 20 }}
-          pb={{ base: 8, md: "10em" }}
-          px={{ base: 2, md: 4 }}
-        >
-          <Container maxW="100%" px={{ base: 4, md: 8 }} position="relative">
-            {/* Mobile Navigation */}
-            <Flex
-              justify="space-between"
-              position="fixed"
-              top={0}
-              display="flex"
-              height={{ base: 24, md: 12 }}
-              zIndex={50}
-              left={0}
-              width="100%"
-              align="center"
-              borderBottom="1px solid"
-              borderBottomColor={spaceThemeEnabled ? "gray.700" : "gray.200"}
-              bg={spaceThemeEnabled ? "rgba(0, 0, 0, 0.95)" : "white"}
-            >
-              <Container px={{ base: 4, md: 8 }} maxW="container.xl">
-                <Flex justify="flex-end" width="100%">
-                  <HStack spacing={{ base: 2, md: 8 }}>
-                    <Box display={{ base: "none", md: "block" }}>
-                      <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
-                    </Box>
-                    <Box display={{ base: "none", md: "block" }}>
-                      <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
-                    </Box>
-                    <Box display={{ base: "none", md: "block" }}>
-                      <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
-                    </Box>
-                    <Box display={{ base: "none", md: "block" }}>
-                      <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
-                    </Box>
-                    <SpaceThemeToggle />
-                    <Box display={{ base: "block", md: "none" }}>
-                      <Menu placement="bottom">
-                        {({ isOpen }) => (
-                          <>
-                            <MenuButton
-                              as={IconButton}
-                              aria-label="Options"
-                              icon={<Icon as={isOpen ? FiX : FiMenu} boxSize={4} />}
-                              variant="outline"
-                              color={textColor}
-                              borderColor={spaceThemeEnabled ? "gray.500" : "gray.200"}
-                              _hover={{
-                                bg: spaceThemeEnabled ? 'gray.700' : 'gray.100'
-                              }}
-                              size="sm"
-                              display="flex"
-                            />
-                            <MenuList bg={spaceThemeEnabled ? 'gray.800' : 'white'}>
-                              <MenuGroup title="NAVIGATION" color={textColor}>
-                                <VStack align="flex-start" px={7} spacing={3} mb={4}>
-                                  <Navigation link="/" spaceEnabled={spaceThemeEnabled}>Home</Navigation>
-                                  <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
-                                  <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
-                                  <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
-                                </VStack>
-                              </MenuGroup>
-                              <MenuGroup title="FIND ME ON" color={textColor}>
-                                <VStack align="flex-start" px={4} spacing={3} mb={2}>
-                                  <Navigation link="https://twitter.com/Aswin_polymath" isExternal spaceEnabled={spaceThemeEnabled}>Twitter</Navigation>
-                                  <Navigation link="https://github.com/AswinManohar" isExternal spaceEnabled={spaceThemeEnabled}>
-                                    GitHub
-                                  </Navigation>
-                                </VStack>
-                              </MenuGroup>
-                            </MenuList>
-                          </>
-                        )}
-                      </Menu>
-                    </Box>
-                  </HStack>
-                </Flex>
-              </Container>
-            </Flex>
-            <Flex direction={{ base: "column", md: "row" }} gap={8}>
-              <VStack
-                align="center"
-                spacing={4}
-                minW={{ md: "200px" }}
-                position={{ md: "sticky" }}
-                top={{ md: "100px" }}
-                height={{ md: "fit-content" }}
-                alignSelf={{ md: "flex-start" }}
+
+      {/* Navigation Bar */}
+      <Box
+        position="fixed"
+        top={0}
+        left={0}
+        right={0}
+        zIndex={50}
+        bg={spaceThemeEnabled ? "rgba(0, 0, 0, 0.8)" : "rgba(250, 250, 250, 0.9)"}
+        backdropFilter="blur(10px)"
+      >
+        <Container maxW="100%" px={{ base: 6, md: 5 }} py={3}>
+          <Flex align="center" justify="space-between">
+            {/* Brand / Name */}
+            <Link href="/">
+              <Text
+                fontSize="xl"
+                fontWeight="400"
+                color={textColor}
+                fontFamily="'STIX Two Text', serif"
               >
-                <Box
-                  position="relative"
-                  width="128px"
-                  height="128px"
-                  borderRadius="full"
-                  overflow="hidden"
-                >
-                  <Image
-                    src="/aswin.jpeg"
-                    alt="Aswin Manohar"
-                    fill
-                    style={{ objectFit: "cover" }}
-                    priority
-                  />
-                </Box>
-                <VStack align="center" spacing={2}>
-                  <TypewriterEffect
-                    text="Aswin Manohar"
-                    fontWeight="normal"
-                    fontSize="lg"
-                    color={textColor}
-                  />
-                  <Text fontSize="sm" color={spaceThemeEnabled ? "gray.300" : "gray.600"} textAlign={{ base: "center", md: "center" }}>
-                    Data Scientist
-                  </Text>
-                </VStack>
-                <HStack spacing={4}>
-                  <Link href="mailto:aswinbio@gmail.com" target="_blank">
-                    <Icon as={FaEnvelope} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
-                  </Link>
-                  <Link href="https://x.com/Aswin_polymath" target="_blank">
-                    <Icon as={FaTwitter} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
-                  </Link>
-                  <Link href="https://github.com/AswinManohar" target="_blank">
-                    <Icon as={FaGithub} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
-                  </Link>
-                  <Link href="https://letterboxd.com/aswin_manohar/" target="_blank">
-                    <Icon as={FaFilm} boxSize={5} color={spaceThemeEnabled ? "gray.300" : "gray.500"} _hover={{ color: spaceThemeEnabled ? "white" : "black" }} />
-                  </Link>
-                </HStack>
-              </VStack>
-              <Box flex={1} maxW="container.md">
-                {children}
-              </Box>
-            </Flex>
-          </Container>
+                Aswin Manohar
+              </Text>
+            </Link>
+
+            <Spacer />
+
+            {/* Desktop Navigation */}
+            <HStack spacing={8} display={{ base: "none", md: "flex" }}>
+              <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
+              <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
+              <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
+              <SpaceThemeToggle />
+            </HStack>
+
+            {/* Mobile Navigation */}
+            <Box display={{ base: "flex", md: "none" }} alignItems="center">
+              <SpaceThemeToggle />
+              <Menu placement="bottom-end">
+                {({ isOpen }) => (
+                  <>
+                    <MenuButton
+                      as={IconButton}
+                      aria-label="Options"
+                      icon={<Icon as={isOpen ? FiX : FiMenu} boxSize={5} />}
+                      variant="ghost"
+                      color={textColor}
+                      ml={2}
+                      _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.100' }}
+                    />
+                    <MenuList bg={spaceThemeEnabled ? 'gray.800' : 'white'} borderColor={spaceThemeEnabled ? 'gray.700' : 'gray.200'}>
+                      <MenuItem as={Link} href="/writing" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>Writing</MenuItem>
+                      <MenuItem as={Link} href="/ML" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>ML</MenuItem>
+                      <MenuItem as={Link} href="/art" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>Art</MenuItem>
+                    </MenuList>
+                  </>
+                )}
+              </Menu>
+            </Box>
+          </Flex>
         </Container>
+      </Box>
+
+      {/* Main Content */}
+      <Container maxW="container.sm" pt={{ base: 24, md: 32 }} pb={20} px={{ base: 4, md: 0 }}>
+        {children}
       </Container>
+
+      {/* Footer */}
+      <Footer spaceEnabled={spaceThemeEnabled} />
     </Box>
   );
-
 }
 export default Layout; 

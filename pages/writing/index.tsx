@@ -70,6 +70,16 @@ const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
                 <Text fontSize="sm" color={dateColor} fontFamily="'STIX Two Text', sans-serif">
                   {post.date}
                 </Text>
+
+                {post.tags && post.tags.length > 0 && (
+                  <HStack spacing={2} mt={1}>
+                    {post.tags.map((tag) => (
+                      <Tag key={tag} size="sm" variant="subtle" colorScheme="gray">
+                        {tag}
+                      </Tag>
+                    ))}
+                  </HStack>
+                )}
               </Stack>
               {index < posts.length - 1 && (
                 <Divider mt={3} borderColor={dividerColor} />

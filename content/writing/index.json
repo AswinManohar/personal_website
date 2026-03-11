@@ -3,7 +3,7 @@
     "title": "Setting Up OpenClaw Securely to Automate My Daily Workflows",
     "date": "March 11, 2026",
     "url": "/writing/openclaw_setup",
-    "external": false,
+    "external": true,
     "tags": [
       "AI",
       "Security",

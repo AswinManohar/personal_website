@@ -22,8 +22,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect } from "react";
+import dynamic from "next/dynamic";
 
-import SpaceBackground from './SpaceBackground';
+const SpaceBackground = dynamic(() => import('./SpaceBackground'), { ssr: false });
 import SpaceThemeToggle from './SpaceThemeToggle';
 import TypewriterEffect from './TypewriterEffect';
 import { useTheme } from '../context/ThemeContext';
@@ -132,6 +133,7 @@ function Layout({ children }: PropsWithChildren) {
             {/* Desktop Navigation */}
             <HStack spacing={8} display={{ base: "none", md: "flex" }}>
               <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
+              <Navigation link="/thoughts" spaceEnabled={spaceThemeEnabled}>Thoughts</Navigation>
               <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
               <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
               <SpaceThemeToggle />
@@ -154,6 +156,7 @@ function Layout({ children }: PropsWithChildren) {
                     />
                     <MenuList bg={spaceThemeEnabled ? 'gray.800' : 'white'} borderColor={spaceThemeEnabled ? 'gray.700' : 'gray.200'}>
                       <MenuItem as={Link} href="/writing" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>Writing</MenuItem>
+                      <MenuItem as={Link} href="/thoughts" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>Thoughts</MenuItem>
                       <MenuItem as={Link} href="/ML" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>ML</MenuItem>
                       <MenuItem as={Link} href="/art" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>Art</MenuItem>
                     </MenuList>

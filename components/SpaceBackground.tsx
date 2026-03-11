@@ -100,13 +100,23 @@ const SpaceBackground: React.FC<SpaceBackgroundProps> = ({
       createStars();
     };
     
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationFrameId);
+      } else {
+        drawStars();
+      }
+    };
+
     window.addEventListener('resize', handleResize);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     setCanvasDimensions();
     createStars();
     drawStars();
-    
+
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
     };
   }, [starCount, speed, depth, color, backgroundColor]);

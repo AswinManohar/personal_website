@@ -1,9 +1,10 @@
 [
-    {
-      "title": "testing",
-      "description": "testing",
-      "date": "November 14, 2022",
-      "image": "",
-      "url": ""
-    }
-  ]
+  {
+    "title": "Semantic Search over Personal Knowledge Base",
+    "description": "A retrieval-augmented pipeline that indexes Markdown notes and PDFs using sentence embeddings (all-MiniLM-L6-v2) and FAISS. Queries are answered by retrieving the top-k chunks and passing them to a local LLM via Ollama, keeping all data on-device.",
+    "date": "February 2026",
+    "image": "",
+    "url": "https://github.com/AswinManohar",
+    "external": true
+  }
+]

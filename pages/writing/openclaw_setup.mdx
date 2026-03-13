@@ -186,10 +186,32 @@ You can edit these files based on what you want your agent to do. Iterate based 
 
 Avoid negative prompting. Models struggle with "Don't" commands.
 
-| Bad | Good |
-|-----|------|
-| "Don't include elephants in the image." | "Only include fields that contain a value." |
-| "Don't upload files without asking." | "Always request explicit approval before uploading any files. Only proceed once you receive a clear 'Yes' from me." |
+<table style={{width: '100%', borderCollapse: 'collapse', marginTop: '12px', marginBottom: '12px'}}>
+  <thead>
+    <tr>
+      <th style={{textAlign: 'left', padding: '8px 12px', borderBottom: '2px solid #e2e8f0', width: '50%'}}>Bad (Negative)</th>
+      <th style={{textAlign: 'left', padding: '8px 12px', borderBottom: '2px solid #e2e8f0', width: '50%'}}>Good (Positive)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{padding: '8px 12px', borderBottom: '1px solid #e2e8f0', verticalAlign: 'top'}}>"Don't include elephants in the image."</td>
+      <td style={{padding: '8px 12px', borderBottom: '1px solid #e2e8f0', verticalAlign: 'top'}}>"Only include fields that contain a value."</td>
+    </tr>
+    <tr>
+      <td style={{padding: '8px 12px', borderBottom: '1px solid #e2e8f0', verticalAlign: 'top'}}>"Don't upload files without asking."</td>
+      <td style={{padding: '8px 12px', borderBottom: '1px solid #e2e8f0', verticalAlign: 'top'}}>"Always request explicit approval before uploading any files. Only proceed once you receive a clear 'Yes' from me."</td>
+    </tr>
+    <tr>
+      <td style={{padding: '8px 12px', borderBottom: '1px solid #e2e8f0', verticalAlign: 'top'}}>"Don't send messages after 11 PM."</td>
+      <td style={{padding: '8px 12px', borderBottom: '1px solid #e2e8f0', verticalAlign: 'top'}}>"Only send non-urgent messages between 9 AM and 11 PM."</td>
+    </tr>
+    <tr>
+      <td style={{padding: '8px 12px', verticalAlign: 'top'}}>"Don't delete files."</td>
+      <td style={{padding: '8px 12px', verticalAlign: 'top'}}>"Read files only. Never modify or delete any file unless I explicitly say 'delete'."</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Building my first AI agents within OpenClaw
 
@@ -199,9 +221,19 @@ I created "Linky" to manage my scattered Notion databases and local CSVs. When I
 
 I even set a cron job in his HEARTBEAT.md, so he reminds me every evening how many unread articles are in my queue. I plan to edit his SOUL.md soon to let him cross-reference arXiv papers for essay research. To set up a cron job, all you have to do is ask the agent to remind you at a particular time. If you want it to remember something, you tell it. As simple as that.
 
+<figure>
+  <img src="/linky.jpg" alt="Linky bot on Telegram saving a Substack article to the knowledge base" loading="lazy" decoding="async" style={{width: '100%', borderRadius: '8px', marginTop: '12px', marginBottom: '4px'}} />
+  <figcaption style={{fontSize: '0.8rem', color: 'gray', marginBottom: '16px'}}>Linky saving a Substack article to the knowledge base via Telegram</figcaption>
+</figure>
+
 ### Cashy: The Finance Tracker
 
 Cashy connects to a personal finance web app I vibe-coded. I just snap pictures of receipts and bills, send them via Telegram, and Cashy processes the image, categorizes the expense, and hits my tracker's API endpoint to log it automatically.
+
+<figure>
+  <img src="/cashy.png" alt="Cashy bot on Telegram processing a receipt and logging the expense" loading="lazy" decoding="async" style={{width: '100%', borderRadius: '8px', marginTop: '12px', marginBottom: '4px'}} />
+  <figcaption style={{fontSize: '0.8rem', color: 'gray', marginBottom: '16px'}}>Cashy processing a receipt from James Joyce Irish Pub and logging it to the finance tracker</figcaption>
+</figure>
 
 ## It is not perfect
 

@@ -6,5 +6,13 @@
     "image": "",
     "url": "https://github.com/AswinManohar",
     "external": true
+  },
+  {
+    "title": "Poddersum: Agentic Podcast Summarizer",
+    "description": "An autonomous agentic system built with LangGraph and Gemini 3.0 that automatically downloads, transcribes, and summarizes podcast episodes from gPodder. Features persistent multi-turn memory for interactive chat, real-time cost tracking, and autonomous background execution.",
+    "date": "April 2026",
+    "image": "",
+    "url": "https://github.com/AswinManohar/poddersum",
+    "external": true
   }
 ]

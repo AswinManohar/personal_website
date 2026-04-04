@@ -1,5 +1,5 @@
-import { HStack, Avatar, Text, VStack, Icon, Tag } from "@chakra-ui/react";
-import { FaCalendar, FaClock } from "react-icons/fa";
+import { HStack, Text, VStack, Tag, Box } from "@chakra-ui/react";
+import { useTheme } from "../context/ThemeContext";
 
 interface AuthorInfoProps {
     date?: string;
@@ -8,26 +8,37 @@ interface AuthorInfoProps {
 }
 
 const AuthorInfo = ({ date, readTime, tags }: AuthorInfoProps) => {
+    const { spaceThemeEnabled } = useTheme();
+    const metaColor = spaceThemeEnabled ? "nothing.text.secondaryDark" : "nothing.text.secondaryLight";
+
     return (
-        <VStack spacing={1} mt={1} mb={4} align="left" width="100%">
-            <HStack spacing={3} mt={0} align="center">
+        <VStack spacing={3} mt={2} mb={8} align="left" width="100%">
+            <HStack spacing={4} mt={0} align="center">
                 {date && (
-                    <HStack spacing={1} align="center">
-                        <Icon as={FaCalendar} boxSize={3} color="gray.400" />
-                        <Text fontSize="xs" color="gray.400" lineHeight="1">
+                    <HStack spacing={2} align="center">
+                        <Text 
+                          fontSize="11px" 
+                          fontFamily="'Space Mono', monospace" 
+                          textTransform="uppercase" 
+                          letterSpacing="0.05em" 
+                          color={metaColor} 
+                          lineHeight="1"
+                        >
                             {date}
                         </Text>
                     </HStack>
                 )}
-                {date && readTime && (
-                    <Text fontSize="xs" color="gray.400" lineHeight="1">
-                        •
-                    </Text>
-                )}
                 {readTime && (
-                    <HStack spacing={1} align="center">
-                        <Icon as={FaClock} boxSize={3} color="gray.400" />
-                        <Text fontSize="xs" color="gray.400" lineHeight="1">
+                    <HStack spacing={2} align="center">
+                        <Box w={1} h={1} borderRadius="full" bg={spaceThemeEnabled ? "nothing.border.dark" : "nothing.border.light"} />
+                        <Text 
+                          fontSize="11px" 
+                          fontFamily="'Space Mono', monospace" 
+                          textTransform="uppercase" 
+                          letterSpacing="0.05em" 
+                          color={metaColor} 
+                          lineHeight="1"
+                        >
                             {readTime}
                         </Text>
                     </HStack>
@@ -36,7 +47,21 @@ const AuthorInfo = ({ date, readTime, tags }: AuthorInfoProps) => {
             {tags && tags.length > 0 && (
                 <HStack spacing={2} mt={1}>
                     {tags.map((tag) => (
-                        <Tag key={tag} size="sm" variant="subtle" colorScheme="gray">
+                        <Tag 
+                          key={tag} 
+                          size="sm" 
+                          variant="outline" 
+                          borderColor={spaceThemeEnabled ? "nothing.border.dark" : "nothing.border.light"}
+                          color={metaColor}
+                          bg="transparent"
+                          borderRadius="full"
+                          px={3}
+                          py={1}
+                          fontSize="10px"
+                          fontFamily="'Space Mono', monospace"
+                          textTransform="uppercase"
+                          letterSpacing="0.05em"
+                        >
                             {tag}
                         </Tag>
                     ))}

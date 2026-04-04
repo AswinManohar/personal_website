@@ -1,6 +1,7 @@
 import {
   Container,
   VStack,
+  Stack,
   Text,
   Flex,
   Box,
@@ -11,23 +12,17 @@ import {
   MenuList,
   MenuItem,
   Icon,
-  Avatar,
-  MenuGroup,
-  useColorMode,
   Spacer,
 } from "@chakra-ui/react";
 import { FaTwitter, FaGithub, FaFilm, FaEnvelope } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { PropsWithChildren, useEffect } from "react";
-import dynamic from "next/dynamic";
+import { PropsWithChildren, useEffect, useState } from "react";
 
-const SpaceBackground = dynamic(() => import('./SpaceBackground'), { ssr: false });
 import SpaceThemeToggle from './SpaceThemeToggle';
-import TypewriterEffect from './TypewriterEffect';
 import { useTheme } from '../context/ThemeContext';
+import { useColorMode } from "@chakra-ui/react";
 
 function Navigation({
   spaceEnabled,
@@ -46,42 +41,91 @@ function Navigation({
 
   return (
     <Link href={link} target={isExternal ? "_blank" : "_self"}>
-      <Text
-        fontSize={{ base: "md", md: "lg" }}
-        color={spaceEnabled ? (isActive ? "white" : "gray.300") : (isActive ? "black" : "gray.500")}
-        _hover={{ color: spaceEnabled ? "white" : "black" }}
-        fontFamily={spaceEnabled ? "inherit" : "'STIX Two Text', sans-serif"}
-      >
-        {children}
-      </Text>
+      <HStack spacing={2} align="center">
+        {isActive && <Box w={1.5} h={1.5} borderRadius="full" bg="nothing.accent" />}
+        <Text
+          fontSize="xs"
+          fontWeight="700"
+          textTransform="uppercase"
+          letterSpacing="0.1em"
+          color={spaceEnabled ? (isActive ? "white" : "nothing.text.secondaryDark") : (isActive ? "black" : "nothing.text.secondaryLight")}
+          _hover={{ color: spaceEnabled ? "white" : "black" }}
+          fontFamily="'Space Mono', monospace"
+        >
+          {children}
+        </Text>
+      </HStack>
     </Link>
   );
 }
 
 function Footer({ spaceEnabled }: { spaceEnabled: boolean }) {
-  const iconColor = spaceEnabled ? "gray.300" : "gray.500";
+  const iconColor = spaceEnabled ? "nothing.text.secondaryDark" : "nothing.text.secondaryLight";
   const hoverColor = spaceEnabled ? "white" : "black";
+  const metaTextColor = spaceEnabled ? "nothing.text.secondaryDark" : "nothing.text.secondaryLight";
+  const dataTextColor = spaceEnabled ? "white" : "black";
+  
+  // Calculate light years since Nov 16, 1974
+  const [lightYears, setLightYears] = useState(51.42);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const startDate = new Date('1974-11-16T00:00:00');
+      const now = new Date();
+      const diffInMs = now.getTime() - startDate.getTime();
+      const msInYear = 31557600000; // Average year in ms
+      setLightYears(diffInMs / msInYear);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <Box as="footer" py={10} mt={10} borderTop="1px solid" borderColor={spaceEnabled ? "gray.800" : "gray.100"}>
+    <Box as="footer" py={16} mt={20} borderTop="1px solid" borderColor={spaceEnabled ? "nothing.border.dark" : "nothing.border.light"}>
       <Container maxW="container.md">
-        <HStack justify="center" spacing={8}>
-          <Link href="mailto:aswinbio@gmail.com" target="_blank">
-            <Icon as={FaEnvelope} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
-          </Link>
-          <Link href="https://x.com/Aswin_polymath" target="_blank">
-            <Icon as={FaTwitter} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
-          </Link>
-          <Link href="https://github.com/AswinManohar" target="_blank">
-            <Icon as={FaGithub} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
-          </Link>
-          <Link href="https://letterboxd.com/aswin_manohar/" target="_blank">
-            <Icon as={FaFilm} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
-          </Link>
-        </HStack>
-        <Text textAlign="center" mt={4} fontSize="sm" color={spaceEnabled ? "gray.500" : "gray.400"}>
-          © {new Date().getFullYear()} Aswin Manohar
-        </Text>
+        <Stack spacing={12} align="center">
+          <HStack justify="center" spacing={12}>
+            <Link href="mailto:aswinbio@gmail.com" target="_blank">
+              <Icon as={FaEnvelope} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
+            </Link>
+            <Link href="https://x.com/Aswin_polymath" target="_blank">
+              <Icon as={FaTwitter} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
+            </Link>
+            <Link href="https://github.com/AswinManohar" target="_blank">
+              <Icon as={FaGithub} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
+            </Link>
+            <Link href="https://letterboxd.com/aswin_manohar/" target="_blank">
+              <Icon as={FaFilm} boxSize={5} color={iconColor} _hover={{ color: hoverColor }} />
+            </Link>
+          </HStack>
+
+          <VStack spacing={4} width="100%" color={metaTextColor}>
+            <HStack spacing={8} justify="center" wrap="wrap">
+              <VStack align="center" spacing={0}>
+                <Text fontFamily="'Space Mono', monospace" fontSize="9px" letterSpacing="0.1em">SIGNAL RADIUS</Text>
+                <Text fontFamily="'Space Mono', monospace" fontSize="xs" fontWeight="700" color={dataTextColor}>
+                  {lightYears.toFixed(8)} LY
+                </Text>
+              </VStack>
+              <VStack align="center" spacing={0}>
+                <Text fontFamily="'Space Mono', monospace" fontSize="9px" letterSpacing="0.1em">TARGET: M13</Text>
+                <Text fontFamily="'Space Mono', monospace" fontSize="xs" fontWeight="700" color={dataTextColor}>
+                  16h 41m 41s | +36° 27′ 36″
+                </Text>
+              </VStack>
+              <VStack align="center" spacing={0}>
+                <Text fontFamily="'Space Mono', monospace" fontSize="9px" letterSpacing="0.1em">TRANSMISSION</Text>
+                <Text fontFamily="'Space Mono', monospace" fontSize="xs" fontWeight="700" color={dataTextColor}>
+                  2380 MHZ | 450 KW
+                </Text>
+              </VStack>
+            </HStack>
+            <Box w="40px" h="1px" bg="nothing.accent" />
+          </VStack>
+
+          <Text textAlign="center" mt={4} fontSize="xs" fontFamily="'Space Mono', monospace" textTransform="uppercase" letterSpacing="0.05em" color={spaceEnabled ? "nothing.text.secondaryDark" : "nothing.text.secondaryLight"}>
+            © {new Date().getFullYear()} Aswin Manohar — Built for the more-than-human world
+          </Text>
+        </Stack>
       </Container>
     </Box>
   );
@@ -90,18 +134,48 @@ function Footer({ spaceEnabled }: { spaceEnabled: boolean }) {
 function Layout({ children }: PropsWithChildren) {
   const { spaceThemeEnabled } = useTheme();
   const { setColorMode } = useColorMode();
-  const router = useRouter();
+  const [isGlitching, setIsGlitching] = useState(false);
 
   useEffect(() => {
     setColorMode(spaceThemeEnabled ? 'dark' : 'light');
+    
+    // Trigger glitch effect on change
+    setIsGlitching(true);
+    const timer = setTimeout(() => setIsGlitching(false), 300);
+    return () => clearTimeout(timer);
   }, [spaceThemeEnabled, setColorMode]);
 
-  const textColor = spaceThemeEnabled ? "rgb(153, 153, 153)" : "black";
+  const textColor = spaceThemeEnabled ? "white" : "black";
 
   return (
-    <Box minH="100vh" w="100%" position="relative" bg={spaceThemeEnabled ? "transparent" : "#FAFAFA"} overflowX="hidden">
-      {spaceThemeEnabled && (
-        <SpaceBackground starCount={300} speed={0.03} depth={4} color="#ffffff" backgroundColor="rgba(0, 0, 0, 0.95)" />
+    <Box 
+      minH="100vh" 
+      w="100%" 
+      position="relative" 
+      bg={spaceThemeEnabled ? "nothing.black" : "nothing.offWhite"} 
+      overflowX="hidden"
+    >
+      
+      {/* Signal Glitch Overlay */}
+      {isGlitching && (
+        <Box 
+          position="fixed"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          bg={spaceThemeEnabled ? "white" : "black"}
+          opacity={0.1}
+          zIndex={9999}
+          pointerEvents="none"
+          animation="glitch-scan 0.2s steps(3) infinite"
+          sx={{
+            '@keyframes glitch-scan': {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(100%)' }
+            }
+          }}
+        />
       )}
 
       {/* Navigation Bar */}
@@ -111,18 +185,22 @@ function Layout({ children }: PropsWithChildren) {
         left={0}
         right={0}
         zIndex={50}
-        bg={spaceThemeEnabled ? "rgba(0, 0, 0, 0.8)" : "rgba(250, 250, 250, 0.9)"}
+        bg={spaceThemeEnabled ? "rgba(0, 0, 0, 0.8)" : "rgba(245, 245, 245, 0.9)"}
         backdropFilter="blur(10px)"
+        borderBottom="1px solid"
+        borderColor={spaceThemeEnabled ? "nothing.border.dark" : "nothing.border.light"}
       >
-        <Container maxW="100%" px={{ base: 6, md: 5 }} py={3}>
+        <Container maxW="container.md" px={{ base: 6, md: 0 }} py={4}>
           <Flex align="center" justify="space-between">
             {/* Brand / Name */}
             <Link href="/">
               <Text
-                fontSize="xl"
-                fontWeight="400"
+                fontSize="lg"
+                fontWeight="700"
+                textTransform="uppercase"
+                letterSpacing="0.05em"
                 color={textColor}
-                fontFamily="'STIX Two Text', serif"
+                fontFamily="'Space Grotesk', sans-serif"
               >
                 Aswin Manohar
               </Text>
@@ -131,11 +209,12 @@ function Layout({ children }: PropsWithChildren) {
             <Spacer />
 
             {/* Desktop Navigation */}
-            <HStack spacing={8} display={{ base: "none", md: "flex" }}>
+            <HStack spacing={6} display={{ base: "none", md: "flex" }}>
               <Navigation link="/writing" spaceEnabled={spaceThemeEnabled}>Writing</Navigation>
               <Navigation link="/thoughts" spaceEnabled={spaceThemeEnabled}>Thoughts</Navigation>
-              <Navigation link="/ML" spaceEnabled={spaceThemeEnabled}>ML</Navigation>
+              <Navigation link="/projects" spaceEnabled={spaceThemeEnabled}>Projects</Navigation>
               <Navigation link="/art" spaceEnabled={spaceThemeEnabled}>Art</Navigation>
+              <Box w="1px" h="16px" bg={spaceThemeEnabled ? "nothing.border.dark" : "nothing.border.light"} mx={2} />
               <SpaceThemeToggle />
             </HStack>
 
@@ -152,13 +231,18 @@ function Layout({ children }: PropsWithChildren) {
                       variant="ghost"
                       color={textColor}
                       ml={2}
-                      _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.100' }}
+                      _hover={{ bg: spaceThemeEnabled ? 'nothing.surface.dark' : 'white' }}
                     />
-                    <MenuList bg={spaceThemeEnabled ? 'gray.800' : 'white'} borderColor={spaceThemeEnabled ? 'gray.700' : 'gray.200'}>
-                      <MenuItem as={Link} href="/writing" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>Writing</MenuItem>
-                      <MenuItem as={Link} href="/thoughts" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>Thoughts</MenuItem>
-                      <MenuItem as={Link} href="/ML" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>ML</MenuItem>
-                      <MenuItem as={Link} href="/art" bg="transparent" _hover={{ bg: spaceThemeEnabled ? 'gray.700' : 'gray.50' }}>Art</MenuItem>
+                    <MenuList 
+                      bg={spaceThemeEnabled ? 'nothing.black' : 'white'} 
+                      borderColor={spaceThemeEnabled ? 'nothing.border.dark' : 'nothing.border.light'}
+                      borderRadius="none"
+                      p={2}
+                    >
+                      <MenuItem as={Link} href="/writing" bg="transparent" fontFamily="'Space Mono', monospace" fontSize="xs" textTransform="uppercase" _hover={{ bg: spaceThemeEnabled ? 'nothing.surface.dark' : 'nothing.offWhite' }}>Writing</MenuItem>
+                      <MenuItem as={Link} href="/thoughts" bg="transparent" fontFamily="'Space Mono', monospace" fontSize="xs" textTransform="uppercase" _hover={{ bg: spaceThemeEnabled ? 'nothing.surface.dark' : 'nothing.offWhite' }}>Thoughts</MenuItem>
+                      <MenuItem as={Link} href="/projects" bg="transparent" fontFamily="'Space Mono', monospace" fontSize="xs" textTransform="uppercase" _hover={{ bg: spaceThemeEnabled ? 'nothing.surface.dark' : 'nothing.offWhite' }}>Projects</MenuItem>
+                      <MenuItem as={Link} href="/art" bg="transparent" fontFamily="'Space Mono', monospace" fontSize="xs" textTransform="uppercase" _hover={{ bg: spaceThemeEnabled ? 'nothing.surface.dark' : 'nothing.offWhite' }}>Art</MenuItem>
                     </MenuList>
                   </>
                 )}
@@ -169,7 +253,7 @@ function Layout({ children }: PropsWithChildren) {
       </Box>
 
       {/* Main Content */}
-      <Container maxW="container.sm" pt={{ base: 24, md: 32 }} pb={20} px={{ base: 4, md: 0 }}>
+      <Container maxW="container.md" pt={{ base: 32, md: 40 }} pb={20} px={{ base: 6, md: 0 }} position="relative" zIndex={1}>
         {children}
       </Container>
 
@@ -178,4 +262,4 @@ function Layout({ children }: PropsWithChildren) {
     </Box>
   );
 }
-export default Layout; 
+export default Layout;

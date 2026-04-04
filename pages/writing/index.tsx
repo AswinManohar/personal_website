@@ -2,6 +2,7 @@ import {
   Heading,
   Link,
   Flex,
+  VStack,
   Text,
   Stack,
   HStack,
@@ -15,6 +16,7 @@ import type { NextPageWithLayout } from "next";
 import Layout from "../../components/Layout";
 import { NextSeo } from "next-seo";
 import { useTheme } from '../../context/ThemeContext';
+import AreciboIcon from "../../components/AreciboIcon";
 
 interface WritingProps {
   posts: Post[];
@@ -23,24 +25,28 @@ interface WritingProps {
 const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
   const { spaceThemeEnabled } = useTheme();
 
-  const titleColor = spaceThemeEnabled ? "white" : "gray.800";
-  const dateColor = spaceThemeEnabled ? "gray.400" : "gray.600";
-  const descColor = spaceThemeEnabled ? "gray.300" : "gray.700";
-  const hoverColor = spaceThemeEnabled ? "blue.300" : "blue.600";
-  const dividerColor = spaceThemeEnabled ? "gray.700" : "gray.200";
-
   return (
     <>
       <NextSeo title="Writing | Aswin Manohar" />
-      <Flex direction="column" align="flex-start" width="100%" gap={8}>
-        <Heading as="h1" size="3xl" mb={5} fontFamily="'Homey Feeling', sans-serif" color={titleColor}>
-          Writing
-        </Heading>
+      <Flex direction="column" align="flex-start" width="100%" gap={12}>
+        <HStack align="center" spacing={6}>
+          <VStack align="flex-start" spacing={1}>
+            {spaceThemeEnabled && (
+              <Text fontFamily="'Space Mono', monospace" fontSize="10px" color="black" letterSpacing="0.2em" mb={-2}>
+                BIT_0001-0420
+              </Text>
+            )}
+            <Heading as="h1" size="3xl" fontFamily="'Doto', sans-serif" fontWeight="700">
+              <Text as="span" color="nothing.accent">W</Text>riting
+            </Heading>
+          </VStack>
+          {spaceThemeEnabled && <AreciboIcon type="dna" size={24} />}
+        </HStack>
 
-        <Stack spacing={8} width="100%">
+        <Stack spacing={10} width="100%">
           {posts.map((post, index) => (
-            <Box key={post.url}>
-              <Stack spacing={2} align="flex-start">
+            <Box key={post.url} pb={8} borderBottom={index < posts.length - 1 ? "1px solid" : "none"} borderColor={spaceThemeEnabled ? "nothing.border.dark" : "nothing.border.light"}>
+              <Stack spacing={3} align="flex-start">
                 <Link
                   href={post.url}
                   target={post.external ? "_blank" : "_self"}
@@ -49,41 +55,68 @@ const Writing: NextPageWithLayout<WritingProps> = ({ posts }) => {
                 >
                   <Heading
                     as="h2"
-                    size="md"
-                    fontFamily="'STIX Two Text', serif"
+                    fontSize="2xl"
+                    fontFamily="'Ubuntu', sans-serif"
                     fontWeight="500"
-                    color={titleColor}
-                    _groupHover={{ color: hoverColor }}
+                    lineHeight="1.2"
+                    textTransform="lowercase"
+                    position="relative"
+                    _groupHover={{ color: "nothing.accent" }}
                   >
                     {post.title}
+                    {spaceThemeEnabled && (
+                      <Box 
+                        as="span" 
+                        position="absolute" 
+                        left={0} 
+                        top="-18px" 
+                        fontSize="9px" 
+                        fontFamily="'Space Mono', monospace" 
+                        opacity={0} 
+                        _groupHover={{ opacity: 0.6 }} 
+                        transition="all 0.2s"
+                        color="#4A9E5C"
+                      >
+                        {Buffer.from(post.title).toString('hex').substring(0, 16)}...
+                      </Box>
+                    )}
                   </Heading>
-
-                  {/* Assuming 'description' or similar field exists, otherwise using a placeholder or omitting */}
-                  {/* If the Post type doesn't have a description, we might need to add it or skip this. 
-                      Based on the target, there is a subtitle. I'll check if 'Post' has it. 
-                      If not, I'll just render the title and date for now. */}
-                  {/* <Text fontSize="md" color={descColor} mt={1}>
-                    {post.description}
-                  </Text> */}
                 </Link>
 
-                <Text fontSize="sm" color={dateColor} fontFamily="'STIX Two Text', sans-serif">
-                  {post.date}
-                </Text>
-
-                {post.tags && post.tags.length > 0 && (
-                  <HStack spacing={2} mt={1}>
-                    {post.tags.map((tag) => (
-                      <Tag key={tag} size="sm" variant="subtle" colorScheme="gray">
-                        {tag}
-                      </Tag>
-                    ))}
-                  </HStack>
-                )}
+                <HStack spacing={4} align="center">
+                  <Text 
+                    fontSize="11px" 
+                    fontFamily="'Space Mono', monospace" 
+                    textTransform="uppercase" 
+                    letterSpacing="0.05em" 
+                    color={spaceThemeEnabled ? "nothing.text.secondaryDark" : "nothing.text.secondaryLight"}
+                  >
+                    {post.date}
+                  </Text>
+                  
+                  {post.tags && post.tags.length > 0 && (
+                    <HStack spacing={2}>
+                      {post.tags.map((tag) => (
+                        <Tag 
+                          key={tag} 
+                          size="sm" 
+                          variant="outline" 
+                          borderColor={spaceThemeEnabled ? "nothing.border.dark" : "nothing.border.light"}
+                          color={spaceThemeEnabled ? "nothing.text.secondaryDark" : "nothing.text.secondaryLight"}
+                          bg="transparent"
+                          borderRadius="full"
+                          px={3}
+                          fontSize="10px"
+                          fontFamily="'Space Mono', monospace"
+                          textTransform="uppercase"
+                        >
+                          {tag}
+                        </Tag>
+                      ))}
+                    </HStack>
+                  )}
+                </HStack>
               </Stack>
-              {index < posts.length - 1 && (
-                <Divider mt={3} borderColor={dividerColor} />
-              )}
             </Box>
           ))}
         </Stack>

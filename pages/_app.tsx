@@ -11,6 +11,7 @@ import { Box } from '@chakra-ui/react';
 
 import { ThemeProvider } from '../context/ThemeContext';
 import '../styles/fonts.css';
+import TableOfContents from '../components/TableOfContents';
 
 /* const theme = extendTheme(
   {
@@ -37,20 +38,48 @@ import '../styles/fonts.css';
  */
 const theme = extendTheme(
   {
+    config: {
+      initialColorMode: 'light',
+      useSystemColorMode: false,
+    },
     fonts: {
-      heading: "'STIX Two Text', sans-serif",
-      body: "'STIX Two Text', sans-serif",
+      heading: "'Space Grotesk', sans-serif",
+      body: "'Ubuntu', sans-serif",
+      mono: "'Space Mono', monospace",
+      display: "'Doto', sans-serif",
+    },
+    colors: {
+      nothing: {
+        black: "#000000",
+        white: "#FFFFFF",
+        offWhite: "#F5F5F5",
+        surface: {
+          dark: "#111111",
+          light: "#FFFFFF",
+        },
+        text: {
+          primaryDark: "#E8E8E8",
+          primaryLight: "#1A1A1A",
+          secondaryDark: "#999999",
+          secondaryLight: "#666666",
+        },
+        accent: "#D71921",
+        border: {
+          dark: "#222222",
+          light: "#E8E8E8",
+        }
+      }
     },
     styles: {
       global: (props: any) => ({
         body: {
-          // Global Body Styles: Affects the entire website unless overridden
-          color: props.colorMode === 'dark' ? 'rgb(153, 153, 153)' : 'black',
-          fontFamily: "'STIX Two Text', sans-serif",
+          bg: props.colorMode === 'dark' ? 'nothing.black' : 'nothing.offWhite',
+          color: props.colorMode === 'dark' ? 'nothing.text.primaryDark' : 'nothing.text.primaryLight',
+          fontFamily: "'Ubuntu', sans-serif",
           fontWeight: 400,
-          fontSize: '15px', // Base font size for the site
+          fontSize: '17px',
           textAlign: 'left',
-          lineHeight: '1.6', // Global line height
+          lineHeight: '1.6',
         },
       }),
     },
@@ -58,78 +87,69 @@ const theme = extendTheme(
   withProse({
     baseStyle: (props: any) => ({
       h1: {
-        // H1: Main Page Titles (e.g. "Hi, I'm Aswin")
-        mt: 2,
-        mb: 2,
-        fontSize: '4xl',
-        fontWeight: 400,
+        fontFamily: "'Doto', sans-serif",
+        mt: 8,
+        mb: 4,
+        fontSize: '5xl',
+        fontWeight: 700,
         textAlign: 'left',
-        lineHeight: '1.2',
+        lineHeight: '1.1',
+        color: props.colorMode === 'dark' ? 'white' : 'black',
       },
       h2: {
-        // H2: Major Section Headings (e.g. "Background", "Interests")
-        mt: 2,
-        mb: 2,
-        fontSize: '2xl',
-        fontWeight: 400,
+        fontFamily: "'Ubuntu', sans-serif",
+        mt: 10,
+        mb: 4,
+        fontSize: '3xl',
+        fontWeight: 500,
         textAlign: 'left',
-        lineHeight: '1.3',
+        lineHeight: '1.2',
+        color: props.colorMode === 'dark' ? 'white' : 'black',
       },
       h3: {
-        // H3: Sub-section Headings
-        mt: 2,
-        mb: 2,
-        fontSize: 'xl',
-        fontWeight: 600,
+        fontFamily: "'Ubuntu', sans-serif",
+        mt: 8,
+        mb: 4,
+        fontSize: '2xl',
+        fontWeight: 500,
         textAlign: 'left',
         lineHeight: '1.3',
-      },
-      h4: {
-        mt: 2,
-        mb: 2,
-        fontSize: 'lg',
-        fontWeight: 400,
-        textAlign: 'left',
-        lineHeight: '1.3',
-      },
-      h5: {
-        mt: 2,
-        mb: 2,
-        fontSize: 'md',
-        fontWeight: 400,
-        textAlign: 'left',
-        lineHeight: '1.3',
-      },
-      h6: {
-        mt: 2,
-        mb: 2,
-        fontSize: 'sm',
-        fontWeight: 400,
-        textAlign: 'left',
-        lineHeight: '1.3',
+        color: props.colorMode === 'dark' ? 'white' : 'black',
       },
       p: {
-        // Paragraphs: Main body text content
-        my: 2, // Spacing between paragraphs (vertical margin)
-        fontSize: '15px', // Font size for body text
-        color: props.colorMode === 'dark' ? 'rgb(153, 153, 153)' : 'black',
+        fontFamily: "'Ubuntu', sans-serif",
+        my: 4,
+        fontSize: '17px',
+        color: props.colorMode === 'dark' ? 'nothing.text.primaryDark' : 'nothing.text.primaryLight',
         fontWeight: 400,
         textAlign: 'left',
-        lineHeight: '1.6' // Spacing between lines within a paragraph
+        lineHeight: '1.6'
       },
       a: {
-        color: props.colorMode === 'dark' ? '#725CAD' : '#725CAD',
-        fontSize: '15px',
+        color: 'nothing.accent',
+        fontSize: '16px',
+        textDecoration: 'underline',
+        textUnderlineOffset: '4px',
+        _hover: {
+          opacity: 0.8
+        }
       },
       strong: {
-        color: props.colorMode === 'dark' ? 'rgb(153, 153, 153)' : 'black',
+        color: props.colorMode === 'dark' ? 'white' : 'black',
+        fontWeight: 600,
       },
       li: {
-        color: props.colorMode === 'dark' ? 'rgb(153, 153, 153)' : 'black',
+        fontFamily: "'Ubuntu', sans-serif",
+        color: props.colorMode === 'dark' ? 'nothing.text.primaryDark' : 'nothing.text.primaryLight',
+        mb: 2,
       },
-      figcaption: {
-        color: props.colorMode === 'dark' ? 'gray.300' : 'gray.600',
-      },
+      code: {
+        fontFamily: "'Space Mono', monospace",
+        fontSize: '0.9em',
+        bg: props.colorMode === 'dark' ? 'nothing.surface.dark' : 'gray.100',
+        px: 1,
+        borderRadius: 'sm',
+      }
     }),
   })
 );
@@ -138,6 +158,7 @@ const theme = extendTheme(
 
 const getDefaultLayout = (page: ReactElement) => (
   <Layout>
+    <TableOfContents />
     <Prose>{page}</Prose>
   </Layout>
 );

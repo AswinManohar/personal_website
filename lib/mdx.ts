@@ -1,6 +1,8 @@
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import fs from "fs";
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 export interface Content<TMetadata = { [key: string]: any }> {
   metadata: TMetadata;
@@ -20,7 +22,13 @@ export async function getMdxContent<TMetadata>(
   const content = fs.readFileSync(contentPath, "utf8");
   const source = await serialize(content, {
     parseFrontmatter: true,
-    mdxOptions: { development: false },
+    mdxOptions: { 
+      development: false,
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: 'wrap' }]
+      ]
+    },
   });
 
   return {

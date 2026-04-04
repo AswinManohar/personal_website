@@ -1,18 +1,18 @@
 [
   {
-    "title": "Semantic Search over Personal Knowledge Base",
-    "description": "A retrieval-augmented pipeline that indexes Markdown notes and PDFs using sentence embeddings (all-MiniLM-L6-v2) and FAISS. Queries are answered by retrieving the top-k chunks and passing them to a local LLM via Ollama, keeping all data on-device.",
-    "date": "February 2026",
-    "image": "",
-    "url": "https://github.com/AswinManohar",
-    "external": true
-  },
-  {
     "title": "Poddersum: Agentic Podcast Summarizer",
     "description": "An autonomous agentic system built with LangGraph and Gemini 3.0 that automatically downloads, transcribes, and summarizes podcast episodes from gPodder. Features persistent multi-turn memory for interactive chat, real-time cost tracking, and autonomous background execution.",
     "date": "April 2026",
     "image": "",
     "url": "https://github.com/AswinManohar/poddersum",
+    "external": true
+  },
+  {
+    "title": "Semantic Search over Personal Knowledge Base",
+    "description": "A retrieval-augmented pipeline that indexes Markdown notes and PDFs using sentence embeddings (all-MiniLM-L6-v2) and FAISS. Queries are answered by retrieving the top-k chunks and passing them to a local LLM via Ollama, keeping all data on-device.",
+    "date": "February 2026",
+    "image": "",
+    "url": "https://github.com/AswinManohar",
     "external": true
   }
 ]

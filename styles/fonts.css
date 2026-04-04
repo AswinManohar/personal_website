@@ -41,5 +41,7 @@
 }
 
 :root {
-  --font-primary: 'STIX Two Text', sans-serif;
+  --font-primary: 'Space Grotesk', sans-serif;
+  --font-display: 'Doto', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 }

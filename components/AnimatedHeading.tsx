@@ -5,18 +5,25 @@ import SpaceThemeToggle from './SpaceThemeToggle';
 
 const AnimatedHeading = () => {
   return (
-    <Box mb={6}>
-      <HStack spacing={4} mb={8} align="center">
-        <Heading as="h1" fontSize={{ base: "3xl", md: "4xl", lg: "4xl" }} letterSpacing="wide">
+    <Box mb={8}>
+      <HStack spacing={0} align="center">
+        <Heading 
+          as="h1" 
+          fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }} 
+          fontFamily="'Doto', sans-serif" 
+          fontWeight="800"
+          textTransform="uppercase"
+          letterSpacing="-0.02em"
+          lineHeight="1"
+        >
           <TypewriterEffect
-            text="Aswin Manohar"
-            speed={150}
+            text="HI, I'M ASWIN"
+            speed={80}
             delay={1000}
             fontSize="inherit"
             fontWeight="inherit"
           />
         </Heading>
-        <SpaceThemeToggle />
       </HStack>
     </Box>
   );

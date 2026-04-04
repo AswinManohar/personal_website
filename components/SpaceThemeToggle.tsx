@@ -1,42 +1,43 @@
 import React from 'react';
-import { IconButton, Tooltip, useColorModeValue, Box, Image } from '@chakra-ui/react';
-import { FaRocket } from 'react-icons/fa';
+import { Box, HStack, Text } from '@chakra-ui/react';
 import { useTheme } from '../context/ThemeContext';
 
 const SpaceThemeToggle = () => {
   const { spaceThemeEnabled, toggleSpaceTheme } = useTheme();
-  const iconColor = useColorModeValue('gray.600', 'gray.200');
 
   return (
-    <Box display="inline-block" ml={2} cursor="pointer">
-      <Tooltip label={spaceThemeEnabled ? 'Escape void' : 'Enter void'}>
-        <IconButton
-          aria-label="Toggle space theme"
-          icon={
-            spaceThemeEnabled ? (
-              <FaRocket />
-            ) : (
-              <Image
-                src="/HD-wallpaper-8-bit-moon-sky-space-modified.png"
-                alt="Planet"
-                width="24px"
-                height="24px"
-                objectFit="contain"
-              />
-            )
-          }
-          onClick={toggleSpaceTheme}
-          variant="unstyled"
-          color={iconColor}
-          size="lg"
-          fontSize="24px"
-          p={2}
-          _focus={{ boxShadow: 'none', outline: 'none' }}
-          _active={{ bg: 'transparent', transform: 'none' }}
-          _hover={{ bg: 'transparent' }}
-          style={{ outline: 'none' }}
+    <Box 
+      onClick={toggleSpaceTheme}
+      cursor="pointer"
+      userSelect="none"
+      px={3}
+      py={1}
+      border="1px solid"
+      borderColor={spaceThemeEnabled ? "nothing.border.dark" : "nothing.border.light"}
+      borderRadius="none"
+      bg="transparent"
+      _hover={{ borderColor: spaceThemeEnabled ? "white" : "black" }}
+      transition="all 0.2s"
+    >
+      <HStack spacing={3} align="center">
+        <Box 
+          w={2} 
+          h={2} 
+          borderRadius="full" 
+          bg={spaceThemeEnabled ? "nothing.accent" : "gray.300"}
+          boxShadow={spaceThemeEnabled ? "0 0 8px #D71921" : "none"}
         />
-      </Tooltip>
+        <Text 
+          fontSize="10px" 
+          fontFamily="'Space Mono', monospace" 
+          fontWeight="700"
+          textTransform="uppercase"
+          letterSpacing="0.1em"
+          color={spaceThemeEnabled ? "white" : "black"}
+        >
+          {spaceThemeEnabled ? "SIGNAL: BROADCAST" : "SIGNAL: STBY"}
+        </Text>
+      </HStack>
     </Box>
   );
 };

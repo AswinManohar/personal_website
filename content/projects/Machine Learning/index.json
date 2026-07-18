@@ -1,11 +1,21 @@
 [
   {
+    "title": "Mealsy: Agentic Nutrition Coach",
+    "description": "An agentic nutrition platform for logging meals in natural language via web chat or Telegram. A LangGraph agent extracts foods and looks up nutrients from the USDA database with Gemini fallbacks, while a Pydantic AI coach delivers personalized, data-grounded coaching from your eating history — built on FastAPI, PostgreSQL + pgvector, Redis, and Celery.",
+    "date": "June 2026",
+    "image": "",
+    "url": "https://github.com/AswinManohar/nutrichat",
+    "external": true,
+    "category": "Machine Learning"
+  },
+  {
     "title": "Poddersum: Agentic Podcast Summarizer",
     "description": "An autonomous agentic system built with LangGraph and Gemini 3.0 that automatically downloads, transcribes, and summarizes podcast episodes from gPodder. Features persistent multi-turn memory for interactive chat, real-time cost tracking, and autonomous background execution.",
     "date": "April 2026",
     "image": "",
     "url": "https://github.com/AswinManohar/poddersum",
-    "external": true
+    "external": true,
+    "category": "Machine Learning"
   },
   {
     "title": "Semantic Search over Personal Knowledge Base",
@@ -13,6 +23,7 @@
     "date": "February 2026",
     "image": "",
     "url": "https://github.com/AswinManohar",
-    "external": true
+    "external": true,
+    "category": "Machine Learning"
   }
 ]

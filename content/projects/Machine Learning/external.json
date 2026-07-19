@@ -1,7 +1,7 @@
 [
   {
     "title": "Mealsy: Agentic Nutrition Coach",
-    "description": "An personal agentic nutrition platform for logging meals in natural language via web chat or Telegram. A LangGraph agent extracts foods and looks up nutrients from the USDA database with Gemini fallbacks, while a Pydantic AI coach delivers personalized, data-grounded coaching from your eating history. Built on FastAPI, PostgreSQL + pgvector, Redis, and Celery.",
+    "description": "A personal agentic nutrition platform for logging meals in natural language via web chat or Telegram. A LangGraph agent extracts foods and looks up nutrients from the USDA database with Gemini fallbacks, while a Pydantic AI coach delivers personalized, data-grounded coaching from your eating history. Built on FastAPI, PostgreSQL + pgvector, Redis, and Celery.",
     "date": "June 2026",
     "image": "",
     "url": "https://github.com/AswinManohar/nutrichat",
